@@ -205,6 +205,18 @@
         animation: spin 1.6s linear infinite;
       }
 
+      .fan[data-mode="approach"] .fan-blades {
+        animation: spin var(--blade-speed, 1.6s) linear infinite;
+      }
+
+      .fan[data-mode="attentive"] .fan-blades {
+        animation: spin 2.4s linear infinite;
+      }
+
+      .fan[data-mode="urgent"] .fan-blades {
+        animation: spin 0.45s linear infinite;
+      }
+
       .fan[data-mode="laugh"] .fan-blades {
         animation: laugh-staccato 1.1s linear infinite;
       }
@@ -213,8 +225,9 @@
         animation: cry-staccato 2.8s linear infinite;
       }
 
-      .fan[data-mode="reverse"] .fan-blades {
-        animation: reverse-spin 0.42s linear infinite;
+      .fan[data-mode="swing"] svg {
+        animation: swing 1.7s ease-in-out infinite alternate;
+        transform-origin: 50% 30%;
       }
 
       .fan.presence-detected .sensor-wave {
@@ -367,6 +380,233 @@
         border-top: 1px solid var(--line);
       }
 
+      .sketch-section {
+        margin-top: clamp(64px, 9vw, 104px);
+        padding-top: 32px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .sketch-section h2 {
+        margin-bottom: 8px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 400;
+        letter-spacing: -0.035em;
+      }
+
+      .sketch-intro {
+        max-width: 500px;
+        margin: 0 auto 24px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .sketch-frame {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 12px;
+        border: 1px solid #343d37;
+        border-radius: 20px;
+        background: #202624;
+        box-shadow: 0 22px 48px rgba(49, 64, 54, 0.12);
+      }
+
+      .control-panel {
+        max-width: 1000px;
+        margin: 28px auto 0;
+        overflow: hidden;
+        border: 1px solid #343d37;
+        border-radius: 20px;
+        background: #202624;
+        color: #f5f4f0;
+        text-align: left;
+        box-shadow: 0 22px 48px rgba(49, 64, 54, 0.12);
+      }
+
+      .panel-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 18px;
+        border-bottom: 1px solid #424b45;
+        color: #c8d0ca;
+        font-size: 0.72rem;
+      }
+
+      .panel-indicators {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .panel-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .panel-indicator::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #8d9990;
+        content: "";
+      }
+
+      .panel-indicator[data-state="active"]::before {
+        background: #9bc6ad;
+        box-shadow: 0 0 10px rgba(155, 198, 173, 0.75);
+      }
+
+      .panel-prototype {
+        color: #bbc4bd;
+        font-size: 0.68rem;
+        text-align: right;
+      }
+
+      .panel-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 18px;
+        padding: 18px;
+      }
+
+      .panel-screen iframe {
+        display: block;
+        width: 100%;
+        min-height: 390px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--paper);
+      }
+
+      .panel-readout {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .panel-card {
+        padding: 14px;
+        border: 1px solid #424b45;
+        border-radius: 12px;
+        background: #29312c;
+      }
+
+      .panel-card h3 {
+        margin: 0 0 7px;
+        color: #c8d0ca;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .panel-card p {
+        margin: 0;
+        color: #f5f4f0;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+      }
+
+      .panel-card .panel-confidence {
+        margin-top: 6px;
+        font-size: 0.7rem;
+      }
+
+      .poem-visual {
+        width: 100%;
+        min-height: 190px;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #29312c;
+      }
+
+      .poem-visual canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .panel-muted {
+        color: #bbc4bd !important;
+      }
+
+      .panel-urgency {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .panel-urgency progress {
+        width: 100%;
+        height: 8px;
+        accent-color: #9bc6ad;
+      }
+
+      .panel-urgency output {
+        min-width: 38px;
+        color: #c8d0ca;
+        font-size: 0.73rem;
+        text-align: right;
+      }
+
+      .panel-poem[hidden] {
+        display: none;
+      }
+
+      .panel-poem p + p {
+        margin-top: 8px;
+      }
+
+      .panel-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .panel-actions .demo-button {
+        min-height: 38px;
+        border-color: #64746a;
+        color: #f5f4f0;
+        font-size: 0.74rem;
+      }
+
+      .panel-actions .demo-button:hover {
+        background: #354139;
+      }
+
+      .panel-actions .demo-button:disabled {
+        opacity: 0.55;
+      }
+
+      .panel-footnote {
+        margin: 0;
+        color: #bbc4bd;
+        font-size: 0.7rem;
+        line-height: 1.5;
+      }
+
+      .sketch-frame iframe {
+        display: block;
+        width: 100%;
+        height: clamp(360px, 60vw, 620px);
+        border: 0;
+        border-radius: 10px;
+        background: var(--paper);
+      }
+
+      .sketch-link {
+        display: inline-block;
+        margin-top: 12px;
+        color: var(--accent-dark);
+        font-size: 0.78rem;
+        text-underline-offset: 3px;
+      }
+
       .detail {
         display: grid;
         grid-template-columns: 42px 1fr;
@@ -436,8 +676,9 @@
         to { transform: rotate(360deg); }
       }
 
-      @keyframes reverse-spin {
-        to { transform: rotate(-360deg); }
+      @keyframes swing {
+        from { transform: rotate(-8deg); }
+        to { transform: rotate(8deg); }
       }
 
       @keyframes laugh-staccato {
@@ -514,6 +755,14 @@
 
         .details {
           gap: 24px;
+        }
+
+        .panel-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .panel-screen iframe {
+          min-height: 340px;
         }
       }
 
@@ -604,9 +853,9 @@
         <p class="eyebrow">A more thoughtful kind of comfort</p>
         <h1 id="hero-title">A fan that knows when you’re here.</h1>
         <p class="hero-intro">
-          An AI mediator responds to spoken commands and vocal cues. Laughter
-          brings quick bursts of air; crying brings a slower, gentler rhythm.
-          If the room stays empty for five hours, the fan reverses direction.
+          A proximity sensor and microphone help the fan respond to someone
+          approaching, breathing, speaking, or expressing an emotion. Its speed
+          and movement shift with the moment.
         </p>
 
         <div class="product-stage">
@@ -617,8 +866,8 @@
                 <path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v4m-3 0h6"></path>
               </svg>
             </span>
-            <h2>A voice, heard.</h2>
-            <p>A built-in microphone listens for your simple voice cues.</p>
+            <h2>Every breath matters.</h2>
+            <p>The microphone responds to speech, sighs, breathing, and blowing.</p>
           </article>
 
           <div class="fan" id="fan" data-mode="standby" role="img" aria-label="A minimal floor fan with a microphone and a presence sensor">
@@ -688,11 +937,11 @@
               </svg>
             </span>
             <h2>Someone nearby.</h2>
-            <p>A presence sensor notices when you enter the room.</p>
+            <p>A proximity sensor activates at about two feet away.</p>
           </article>
         </div>
 
-        <p class="demo-intro">The fan only spins when the interpreter receives an instruction.</p>
+        <p class="demo-intro">Preview how the fan responds to presence and emotion.</p>
         <div class="command-flow" aria-label="Human voice is interpreted by AI and sent to the fan">
           <span>Your voice</span><span aria-hidden="true">→</span>
           <strong>AI mediator</strong><span aria-hidden="true">→</span>
@@ -720,32 +969,125 @@
         <div class="response-demo" aria-label="Simulate voice and absence responses">
           <p>Preview the fan’s response patterns</p>
           <div class="response-buttons">
+            <button class="demo-button" id="approach-demo" type="button">Simulate approaching</button>
+            <button class="demo-button" id="attentive-demo" type="button">Simulate speech cue</button>
             <button class="demo-button" id="laugh-demo" type="button">Simulate laughter</button>
             <button class="demo-button" id="cry-demo" type="button">Simulate crying</button>
-            <button class="demo-button" id="away-demo" type="button">Simulate 5 hours away</button>
+            <button class="demo-button" id="swing-demo" type="button">Simulate swinging</button>
+            <button class="demo-button" id="rest-demo" type="button">Simulate resting</button>
           </div>
         </div>
       </section>
 
-      <section class="page details" aria-label="How the fan responds">
+      <section class="page details" aria-label="Fan behavior instructions">
         <article class="detail">
           <span class="detail-mark" aria-hidden="true">01</span>
           <div>
-            <h2>Voice becomes movement</h2>
-            <p>The AI interprets voice commands and vocal cues: laughter prompts short, quick bursts; crying prompts slower, gentler pulses.</p>
+            <h2>Resting, facing forward</h2>
+            <p>The fan rests with its blades off and facing forward when a person leaves the area for less than 11 minutes, or stays near the fan for more than 23 minutes.</p>
           </div>
         </article>
         <article class="detail">
           <span class="detail-mark" aria-hidden="true">02</span>
           <div>
-            <h2>A long, quiet absence</h2>
-            <p>After five hours without a person in the room, the fan runs quickly in reverse to send a breeze the opposite way.</p>
+            <h2>A closer approach</h2>
+            <p>At approximately two feet away, the proximity sensor activates. As someone approaches within two feet, the blades slowly and progressively speed up to express urgency.</p>
+          </div>
+        </article>
+        <article class="detail">
+          <span class="detail-mark" aria-hidden="true">03</span>
+          <div>
+            <h2>Attentive to presence and breath</h2>
+            <p>The fan stays attentive while a person speaks, sighs, exhales, breathes, or blows toward it, as well as when they come closer or are too close.</p>
+          </div>
+        </article>
+        <article class="detail">
+          <span class="detail-mark" aria-hidden="true">04</span>
+          <div>
+            <h2>Emotion in the rhythm</h2>
+            <p>Laughter, amusement, joy, and happy words bring rhythmic, fast staccato airflow. Sadness, crying, and unhappiness bring a slower, gentle staccato as the blades decrease speed.</p>
+          </div>
+        </article>
+        <article class="detail">
+          <span class="detail-mark" aria-hidden="true">05</span>
+          <div>
+            <h2>A suspended, swinging fan</h2>
+            <p>The design uses three or four integrated fans: one side runs while the other is off, then they switch sides to make the unit swing. The fan hangs from one or two cords and needs a cordless motor.</p>
           </div>
         </article>
       </section>
 
+      <section class="page sketch-section" aria-labelledby="sketch-title">
+        <p class="eyebrow">Raspberry Pi control panel</p>
+        <h2 id="sketch-title">A message carried on the breeze.</h2>
+        <p class="sketch-intro">
+          The p5.js sketch, microphone feedback, fan status, and bilingual
+          poems share one display. The panel shows what it heard and how the
+          fan interpreted it.
+        </p>
+        <div class="control-panel" role="region" aria-label="Raspberry Pi fan and microphone control panel prototype">
+          <div class="panel-toolbar">
+            <div class="panel-indicators">
+              <span class="panel-indicator" id="panel-mic-indicator" data-state="idle">Microphone off</span>
+              <span class="panel-indicator" id="panel-fan-indicator" data-state="idle">Fan resting</span>
+            </div>
+            <span class="panel-prototype">Prototype · hardware not connected</span>
+          </div>
+          <div class="panel-grid">
+            <div class="panel-screen">
+              <iframe
+                src="https://editor.p5js.org/Fernanda_2026/full/mZ58cealR"
+                title="Interactive p5.js sketch on the Raspberry Pi display"
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="panel-readout">
+              <section class="panel-card" aria-labelledby="panel-heard-title">
+                <h3 id="panel-heard-title">What the person said</h3>
+                <p id="panel-transcript" class="panel-muted" aria-live="polite">Waiting for an invited voice interaction.</p>
+                <p id="panel-confidence" class="panel-muted panel-confidence">Browser confidence estimate unavailable</p>
+              </section>
+              <section class="panel-card" aria-labelledby="panel-feedback-title">
+                <h3 id="panel-feedback-title">Fan feedback</h3>
+                <p id="panel-feedback" aria-live="polite">Resting, facing forward. No fan command has been sent.</p>
+              </section>
+              <section class="panel-card" aria-labelledby="panel-urgency-title">
+                <h3 id="panel-urgency-title">Message urgency</h3>
+                <div class="panel-urgency">
+                  <progress id="urgency-progress" max="100" value="0" aria-label="Message urgency"></progress>
+                  <output id="urgency-value" for="urgency-progress">0%</output>
+                </div>
+                <p id="panel-message" class="panel-muted" style="margin-top: 8px">No message waiting.</p>
+              </section>
+              <section class="panel-card panel-poem" id="panel-poem" aria-labelledby="panel-poem-title">
+                <h3 id="panel-poem-title">Breath &amp; poem display · p5.js</h3>
+                <div id="poem-visual" class="poem-visual" aria-label="p5.js visualization of microphone breath detection and the bilingual poem">
+                  <p id="poem-visual-fallback" class="panel-muted">Loading the p5.js breath display…</p>
+                </div>
+                <div class="sr-only" id="poem-accessible-copy">
+                  <p lang="en">Come close; the quiet has a name. Breathe softly, and the words take flight.</p>
+                  <p lang="es">Acércate; el silencio tiene nombre. Respira suave, y las palabras vuelan.</p>
+                </div>
+              </section>
+              <div class="panel-actions" aria-label="Control panel prototype actions">
+                <button class="demo-button" id="message-demo" type="button">Simulate message while away</button>
+                <button class="demo-button" id="breath-demo" type="button" aria-controls="panel-poem">Enable breath detection</button>
+                <button class="demo-button" id="dismiss-poem" type="button" aria-controls="panel-poem" hidden>Clear poem manually</button>
+              </div>
+              <p id="breath-status" class="panel-footnote" aria-live="polite">No spoken phrase is needed. The p5.js display will visualize microphone activity and dissipate the poem when breath is detected. Microphone access is requested only after you enable breath detection; other loud sounds may also trigger this rough prototype cue.</p>
+            </div>
+          </div>
+        </div>
+        <a
+          class="sketch-link"
+          href="https://editor.p5js.org/Fernanda_2026/full/mZ58cealR"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Open the sketch on p5.js</a>
+      </section>
+
       <p class="page privacy-note">
-        This is a visual prototype, not connected to an AI service or physical fan. Voice input starts only when you tap “Speak a command”; the response-pattern buttons simulate laughter, crying, and five hours away. No emotion detection or five-hour timer runs in this demo.
+        This is a visual prototype, not connected to physical sensors, integrated fans, or a motor. Voice recognition and breath sensing are opt-in browser features; the panel does not continuously listen or run an automatic absence timer.
       </p>
     </main>
 
@@ -760,50 +1102,287 @@
       const voiceButton = document.querySelector("#voice-demo");
       const presenceButton = document.querySelector("#presence-demo");
       const resetButton = document.querySelector("#reset-demo");
+      const approachButton = document.querySelector("#approach-demo");
+      const attentiveButton = document.querySelector("#attentive-demo");
       const laughButton = document.querySelector("#laugh-demo");
       const cryButton = document.querySelector("#cry-demo");
-      const awayButton = document.querySelector("#away-demo");
+      const swingButton = document.querySelector("#swing-demo");
+      const restButton = document.querySelector("#rest-demo");
+      const panelTranscript = document.querySelector("#panel-transcript");
+      const panelConfidence = document.querySelector("#panel-confidence");
+      const panelFeedback = document.querySelector("#panel-feedback");
+      const panelMicIndicator = document.querySelector("#panel-mic-indicator");
+      const panelFanIndicator = document.querySelector("#panel-fan-indicator");
+      const urgencyProgress = document.querySelector("#urgency-progress");
+      const urgencyValue = document.querySelector("#urgency-value");
+      const panelMessage = document.querySelector("#panel-message");
+      const panelPoem = document.querySelector("#panel-poem");
+      const messageButton = document.querySelector("#message-demo");
+      const breathButton = document.querySelector("#breath-demo");
+      const dismissPoemButton = document.querySelector("#dismiss-poem");
+      const breathStatus = document.querySelector("#breath-status");
       const commandForm = document.querySelector("#command-form");
       const commandInput = document.querySelector("#command-input");
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       let recognition = null;
       let isListening = false;
       let isPresent = false;
+      let approachTimeout = null;
+      let breathStream = null;
+      let breathContext = null;
+      let breathAnalyser = null;
+      let breathFrame = null;
+      let loudBreathFrames = 0;
+      let breathDetected = false;
+      let quietBreathFrames = 0;
+      let breathLevel = 0;
+      let poemIsVisible = false;
+      let poemSketch = null;
+
+      function initializePoemSketch() {
+        if (poemSketch) return;
+        if (!window.p5) {
+          document.querySelector("#poem-visual-fallback").textContent =
+            "The p5.js visualization could not load. The microphone status and text poem remain available.";
+          setPanelFeedback("p5.js did not load, so the animated breath display is unavailable.");
+          return;
+        }
+
+        poemSketch = new window.p5((p) => {
+          let poemVisible = false;
+          let poemDissipating = false;
+          let particles = [];
+
+          p.setup = () => {
+            const host = document.querySelector("#poem-visual");
+            const canvas = p.createCanvas(Math.max(host.clientWidth, 280), 190);
+            canvas.elt.setAttribute("role", "img");
+            canvas.elt.setAttribute("aria-label", "p5.js shows microphone activity and displays the English and Spanish poem.");
+            document.querySelector("#poem-visual-fallback").hidden = true;
+            p.textFont("Georgia, Times New Roman, serif");
+          };
+
+          p.draw = () => {
+            p.background(41, 49, 44);
+            p.noStroke();
+            p.fill(200, 208, 202);
+            p.textSize(9);
+            p.textAlign(p.LEFT, p.CENTER);
+            p.text(breathStream ? "MICROPHONE · LISTENING FOR BREATH" : "MICROPHONE · OFF", 14, 17);
+
+            const activity = Math.min(1, breathLevel * 8);
+            p.textAlign(p.RIGHT, p.CENTER);
+            p.fill(breathDetected ? p.color(190, 231, 203) : p.color(200, 208, 202));
+            p.text(breathDetected ? "BREATH DETECTED" : "BREATH SIGNAL", p.width - 14, 17);
+            p.stroke(112, 145, 122, 70 + activity * 150);
+            p.strokeWeight(1 + activity * 2);
+            p.noFill();
+            p.beginShape();
+            for (let x = 14; x < p.width - 14; x += 4) {
+              const phase = p.frameCount * 0.08 + x * 0.055;
+              const y = 39 + Math.sin(phase) * (2 + activity * 17);
+              p.vertex(x, y);
+            }
+            p.endShape();
+            p.noStroke();
+
+            if (poemVisible && !poemDissipating) {
+              p.fill(237, 239, 232);
+              p.textAlign(p.CENTER, p.CENTER);
+              p.textSize(p.width < 350 ? 11 : 13);
+              p.text("Come close; the quiet has a name.", p.width / 2, 78);
+              p.text("Breathe softly, and the words take flight.", p.width / 2, 101);
+              p.fill(180, 207, 188);
+              p.text("Acércate; el silencio tiene nombre.", p.width / 2, 132);
+              p.text("Respira suave, y las palabras vuelan.", p.width / 2, 155);
+            }
+
+            if (poemDissipating) {
+              p.textAlign(p.CENTER, p.CENTER);
+              p.textSize(p.width < 350 ? 11 : 13);
+              for (const particle of particles) {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.vy -= 0.012;
+                particle.alpha -= 3.2;
+                p.fill(particle.color, Math.max(0, particle.alpha));
+                p.text(particle.letter, particle.x, particle.y);
+              }
+              particles = particles.filter((particle) => particle.alpha > 0);
+              if (particles.length === 0) {
+                poemDissipating = false;
+                poemVisible = false;
+                finishPoemDissipation();
+              }
+            }
+          };
+
+          p.windowResized = () => {
+            const width = document.querySelector("#poem-visual").clientWidth;
+            if (width > 0) p.resizeCanvas(width, 190);
+          };
+
+          p.showPoem = () => {
+            particles = [];
+            poemDissipating = false;
+            poemVisible = true;
+          };
+
+          p.dissipatePoem = () => {
+            if (!poemVisible || poemDissipating) return;
+            poemDissipating = true;
+            particles = [];
+            const lines = [
+              ["Come close; the quiet has a name.", 78, [237, 239, 232]],
+              ["Breathe softly, and the words take flight.", 101, [237, 239, 232]],
+              ["Acércate; el silencio tiene nombre.", 132, [180, 207, 188]],
+              ["Respira suave, y las palabras vuelan.", 155, [180, 207, 188]],
+            ];
+            p.textSize(p.width < 350 ? 11 : 13);
+            p.textAlign(p.CENTER, p.CENTER);
+            for (const [line, y, color] of lines) {
+              let x = p.width / 2 - p.textWidth(line) / 2;
+              for (const letter of line) {
+                const letterWidth = p.textWidth(letter);
+                particles.push({
+                  letter,
+                  x: x + letterWidth / 2,
+                  y,
+                  vx: p.random(-1.5, 1.5),
+                  vy: p.random(-1.7, 0.6),
+                  alpha: 255,
+                  color: p.color(...color),
+                });
+                x += letterWidth;
+              }
+            }
+          };
+
+          p.clearPoem = () => {
+            particles = [];
+            poemDissipating = false;
+            poemVisible = false;
+          };
+
+          p.setBreathLevel = (level) => {
+            breathLevel = level;
+          };
+        }, document.querySelector("#poem-visual"));
+        // The embedded p5 editor can delay window load, so start this sketch directly.
+        if (!poemSketch._setupDone) poemSketch._start();
+        if (poemIsVisible) poemSketch.showPoem();
+      }
+
+      const p5Script = document.createElement("script");
+      p5Script.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js";
+      p5Script.onload = initializePoemSketch;
+      p5Script.onerror = () => {
+        document.querySelector("#poem-visual-fallback").textContent =
+          "The p5.js visualization could not load. The microphone status and text poem remain available.";
+        setPanelFeedback("p5.js did not load, so the animated breath display is unavailable.");
+      };
+      document.head.append(p5Script);
 
       function setFanMode(mode, message) {
+        window.clearTimeout(approachTimeout);
+        approachTimeout = null;
+        fan.style.removeProperty("--blade-speed");
         fan.dataset.mode = mode;
         status.textContent = message;
+        panelFanIndicator.dataset.state = mode === "standby" ? "idle" : "active";
+        panelFanIndicator.textContent = mode === "standby" ? "Fan resting" : `Fan ${mode}`;
+      }
+
+      function setPanelFeedback(message) {
+        panelFeedback.textContent = message;
+      }
+
+      function showHeardText(text) {
+        panelTranscript.textContent = text;
+        panelTranscript.classList.remove("panel-muted");
+      }
+
+      function setRecognitionConfidence(confidence) {
+        if (typeof confidence === "number" && Number.isFinite(confidence)) {
+          panelConfidence.textContent = `Browser estimate: ${Math.round(confidence * 100)}% confidence`;
+        } else {
+          panelConfidence.textContent = "Browser confidence estimate unavailable";
+        }
+      }
+
+      function simulateApproach() {
+        isPresent = true;
+        fan.classList.add("presence-detected");
+        presenceButton.textContent = "Clear presence";
+        setFanMode("approach", "Approaching within about 2 feet — blade speed is progressively increasing.");
+        setPanelFeedback("Proximity cue detected. Blade speed is increasing as the person approaches.");
+
+        let bladeSpeed = 1.6;
+        function increaseSpeed() {
+          if (fan.dataset.mode !== "approach") return;
+          bladeSpeed = Math.max(0.4, bladeSpeed - 0.2);
+          fan.style.setProperty("--blade-speed", `${bladeSpeed}s`);
+          if (bladeSpeed > 0.4) {
+            approachTimeout = window.setTimeout(increaseSpeed, 350);
+          }
+        }
+
+        approachTimeout = window.setTimeout(increaseSpeed, 350);
       }
 
       function interpretCommand(command) {
         const normalized = command.toLowerCase().replace(/[.,!?]/g, " ").replace(/\s+/g, " ").trim();
+        showHeardText(command);
 
-        if (/\b(laugh|laughing|laughter)\b/.test(normalized)) {
+        if (/\b(laugh|laughing|laughter|amused|amusement|joy|joyful|happy)\b/.test(normalized)) {
           setFanMode("laugh", "Laughter cue interpreted — quick, short staccato bursts.");
+          setPanelFeedback("Joyful cue interpreted. Fan response: rhythmic, fast staccato.");
           return;
         }
 
-        if (/\b(cry|crying|tears|sobbing)\b/.test(normalized)) {
+        if (/\b(sad|sadness|cry|crying|tears|sobbing|unhappy|unhappiness)\b/.test(normalized)) {
           setFanMode("cry", "Crying cue interpreted — slow, gentle staccato bursts.");
+          setPanelFeedback("Sad cue interpreted. Fan response: slower staccato with decreasing blade speed.");
+          return;
+        }
+
+        if (/\b(speak|speaking|speech)\b/.test(normalized)) {
+          setFanMode("attentive", "Speech cue interpreted — the fan remains attentive.");
+          setPanelFeedback("Speech cue interpreted. Fan remains attentive.");
+          return;
+        }
+
+        if (/\b(approach|approaching|closer|close|nearby)\b/.test(normalized)) {
+          simulateApproach();
+          return;
+        }
+
+        if (/\b(swing|swinging)\b/.test(normalized)) {
+          setFanMode("swing", "Swinging simulated — integrated fans alternate from side to side.");
+          setPanelFeedback("Swing command interpreted. Integrated fans alternate from side to side.");
           return;
         }
 
         if (/\b(turn|switch)\s+(the\s+)?fan\s+on\b|\b(start|spin)\s+(the\s+)?fan\b|\b(turn|switch)\s+it\s+on\b|\b(start|spin)\s+it\b|\bfan\s+on\b/.test(normalized)) {
           setFanMode("command", `The interpreter understood “${command}” — fan on.`);
+          setPanelFeedback("Fan-on command understood and simulated.");
           return;
         }
 
         if (/\b(turn|switch)\s+(the\s+)?fan\s+off\b|\b(stop)\s+(the\s+)?fan\b|\b(turn|switch)\s+it\s+off\b|\b(stop)\b|\bfan\s+off\b/.test(normalized)) {
           setFanMode("standby", `The interpreter understood “${command}” — fan off.`);
+          setPanelFeedback("Fan-off command understood. Fan resting, facing forward.");
           return;
         }
 
         status.textContent = `I heard “${command},” but didn’t find a fan command. Try “turn the fan on” or “stop.”`;
+        setPanelFeedback("Speech captured, but no matching fan response was found. Check the transcript before acting.");
       }
 
       function startVoiceInput() {
         if (!SpeechRecognition) {
           status.textContent = "Voice input isn’t available in this browser. Enter a command below instead.";
+          setPanelFeedback("Voice recognition is unavailable. Use the text command field instead.");
           return;
         }
 
@@ -820,11 +1399,15 @@
         recognition.onstart = () => {
           isListening = true;
           voiceButton.textContent = "Stop listening";
+          panelMicIndicator.dataset.state = "active";
+          panelMicIndicator.textContent = "Microphone listening";
           status.textContent = "Listening for a fan command…";
         };
 
         recognition.onresult = (event) => {
-          const spokenCommand = event.results[0][0].transcript.trim();
+          const result = event.results[0][0];
+          const spokenCommand = result.transcript.trim();
+          setRecognitionConfidence(result.confidence);
           interpretCommand(spokenCommand);
         };
 
@@ -832,25 +1415,182 @@
           if (event.error === "aborted") return;
           if (event.error === "not-allowed" || event.error === "service-not-allowed") {
             status.textContent = "Microphone access was not allowed. Enter a command below instead.";
+            setPanelFeedback("Microphone permission was not granted. No voice was processed.");
             return;
           }
           if (event.error === "no-speech") {
             status.textContent = "I didn’t hear a command. Try again or enter one below.";
+            setPanelFeedback("No speech detected. You can try again or enter a text command.");
             return;
           }
           status.textContent = `Voice input error: ${event.error}. Enter a command below instead.`;
+          setPanelFeedback(`Voice recognition error: ${event.error}. Use the text command field instead.`);
         };
 
         recognition.onend = () => {
           isListening = false;
           voiceButton.textContent = "Speak a command";
+          if (!breathStream) {
+            panelMicIndicator.dataset.state = "idle";
+            panelMicIndicator.textContent = "Microphone off";
+          }
         };
 
         try {
           recognition.start();
         } catch (error) {
           status.textContent = `Could not start voice input: ${error.message}`;
+          setPanelFeedback(`Could not start voice input: ${error.message}`);
         }
+      }
+
+      function stopBreathSensing() {
+        if (breathFrame !== null) {
+          window.cancelAnimationFrame(breathFrame);
+          breathFrame = null;
+        }
+        if (breathStream) {
+          breathStream.getTracks().forEach((track) => track.stop());
+          breathStream = null;
+        }
+        if (breathContext && breathContext.state !== "closed") {
+          breathContext.close();
+        }
+        breathContext = null;
+        breathAnalyser = null;
+        loudBreathFrames = 0;
+        breathDetected = false;
+        quietBreathFrames = 0;
+        panelMicIndicator.dataset.state = "idle";
+        panelMicIndicator.textContent = "Microphone off";
+        breathButton.textContent = "Enable breath detection";
+      }
+
+      function clearPoem(message) {
+        poemIsVisible = false;
+        poemSketch?.clearPoem();
+        if (!poemSketch) {
+          document.querySelector("#poem-visual-fallback").textContent = message;
+        }
+        dismissPoemButton.hidden = true;
+        breathStatus.textContent = breathStream
+          ? "Breath detection remains active. The poem was cleared."
+          : "Enable breath detection to let the microphone notice breathing.";
+        panelMessage.textContent = message;
+        setUrgency(0);
+      }
+
+      function finishPoemDissipation() {
+        poemIsVisible = false;
+        if (!poemSketch) {
+          document.querySelector("#poem-visual-fallback").textContent = "The poem has dissipated.";
+        }
+        dismissPoemButton.hidden = true;
+        breathStatus.textContent = "Breath detected. The poem has dissipated from the p5.js display.";
+        panelMessage.textContent = "A detected breath carried the poem away.";
+        setUrgency(0);
+        setPanelFeedback("Breath detected by microphone. The bilingual poem dissipated in the p5.js display.");
+      }
+
+      function setUrgency(value) {
+        urgencyProgress.value = value;
+        urgencyValue.value = `${value}%`;
+        urgencyValue.textContent = `${value}%`;
+      }
+
+      function monitorBreath() {
+        if (!breathAnalyser) return;
+        const samples = new Float32Array(breathAnalyser.fftSize);
+        breathAnalyser.getFloatTimeDomainData(samples);
+        let sumSquares = 0;
+        for (const sample of samples) sumSquares += sample * sample;
+        const level = Math.sqrt(sumSquares / samples.length);
+        poemSketch?.setBreathLevel(level);
+
+        if (level < 0.02) {
+          quietBreathFrames += 1;
+          if (quietBreathFrames >= 4) breathDetected = false;
+        } else {
+          quietBreathFrames = 0;
+        }
+
+        if (!breathDetected) {
+          loudBreathFrames = level > 0.035 ? loudBreathFrames + 1 : 0;
+          if (loudBreathFrames >= 4) {
+            breathDetected = true;
+            loudBreathFrames = 0;
+            isPresent = true;
+            fan.classList.add("presence-detected");
+            presenceButton.textContent = "Clear presence";
+            setFanMode("attentive", "Breathing detected by microphone — the fan remains attentive.");
+            setPanelFeedback("Microphone detected sustained sound as a breath-like cue. No spoken phrase was needed; the fan remains attentive.");
+            if (poemIsVisible) {
+              if (poemSketch) {
+                breathStatus.textContent = "Breath detected. Watch the p5.js display as the poem dissipates.";
+                panelMessage.textContent = "Breath detected — the poem is dissipating.";
+                poemSketch.dissipatePoem();
+              } else {
+                clearPoem("The poem was cleared after breath detection; the p5.js animation was unavailable.");
+              }
+            }
+          }
+        }
+        breathFrame = window.requestAnimationFrame(monitorBreath);
+      }
+
+      async function enableBreathSensing() {
+        if (breathStream) {
+          stopBreathSensing();
+          breathStatus.textContent = poemIsVisible
+            ? "Breath detection stopped. The poem is still displayed."
+            : "Breath detection stopped.";
+          return;
+        }
+        if (!navigator.mediaDevices?.getUserMedia || !window.AudioContext) {
+          breathStatus.textContent = poemIsVisible
+            ? "Breath detection is unavailable here. Use the manual clear button."
+            : "Breath detection is unavailable in this browser.";
+          panelMicIndicator.dataset.state = "idle";
+          panelMicIndicator.textContent = "Microphone unavailable";
+          return;
+        }
+
+        try {
+          breathStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          breathContext = new AudioContext();
+          const source = breathContext.createMediaStreamSource(breathStream);
+          breathAnalyser = breathContext.createAnalyser();
+          breathAnalyser.fftSize = 2048;
+          source.connect(breathAnalyser);
+          panelMicIndicator.dataset.state = "active";
+          panelMicIndicator.textContent = "Breath detection active";
+          breathButton.textContent = "Stop breath detection";
+          breathStatus.textContent = "Microphone is listening for sustained breath-like sound. No spoken phrase is needed.";
+          monitorBreath();
+        } catch (error) {
+          stopBreathSensing();
+          breathStatus.textContent = `Could not start breath detection: ${error.message}.`;
+        }
+      }
+
+      function showMessageAndPoem() {
+        poemIsVisible = true;
+        poemSketch?.showPoem();
+        if (!poemSketch) {
+          document.querySelector("#poem-visual-fallback").textContent =
+            "Come close; the quiet has a name. Breathe softly, and the words take flight.\nAcércate; el silencio tiene nombre. Respira suave, y las palabras vuelan.";
+        }
+        dismissPoemButton.hidden = false;
+        panelMessage.textContent = "A poem is waiting. Come close and blow gently to let it go.";
+        setUrgency(82);
+        panelTranscript.textContent = "No speech captured. This message is a proximity reminder.";
+        panelTranscript.classList.add("panel-muted");
+        setRecognitionConfidence(undefined);
+        setPanelFeedback("Person away too long — message waiting. The fan signals urgency and invites the person to come closer.");
+        setFanMode("urgent", "Message waiting — urgency simulated while the person is away. Come closer to receive the poem.");
+        breathStatus.textContent = breathStream
+          ? "Breath detection is active. Blow gently toward the microphone to clear the poem."
+          : "Enable breath detection to let the microphone notice breathing; blow gently to clear the poem.";
       }
 
       voiceButton.addEventListener("click", startVoiceInput);
@@ -860,9 +1600,11 @@
         const command = commandInput.value.trim();
         if (!command) {
           status.textContent = "Enter a fan command first.";
+          setPanelFeedback("No text was entered. Enter a command to preview how it is interpreted.");
           commandInput.focus();
           return;
         }
+        setRecognitionConfidence(undefined);
         interpretCommand(command);
         commandInput.value = "";
       });
@@ -871,36 +1613,64 @@
         isPresent = !isPresent;
         fan.classList.toggle("presence-detected", isPresent);
         presenceButton.textContent = isPresent ? "Clear presence" : "Simulate presence detected";
-        if (isPresent && fan.dataset.mode === "reverse") {
-          setFanMode("standby", "Presence detected — reverse-away mode stopped and the five-hour timer reset.");
+        if (isPresent) {
+          status.textContent = "Presence detected — the proximity sensor activates at about 2 feet.";
+          setPanelFeedback("Proximity sensor simulated as active at approximately two feet.");
+        } else if (fan.dataset.mode === "approach") {
+          setFanMode("standby", "Presence cleared — fan off and facing forward in the resting simulation.");
+          setPanelFeedback("Person has left. Resting state simulated; the real absence timer is not connected.");
         } else {
-          status.textContent = isPresent
-            ? "Presence detected. The five-hour absence timer has reset."
-            : "Presence cleared — a real device would start its five-hour timer.";
+          status.textContent = "Presence cleared — the under-11-minute absence resting condition is being simulated.";
+          setPanelFeedback("Presence cleared. The real 11-minute absence timer is not connected.");
         }
       });
 
+      approachButton.addEventListener("click", simulateApproach);
+
+      attentiveButton.addEventListener("click", () => {
+        isPresent = true;
+        fan.classList.add("presence-detected");
+        presenceButton.textContent = "Clear presence";
+        setFanMode("attentive", "Speech response simulated — the fan remains attentive.");
+        setPanelFeedback("Speech cue simulated. Fan remains attentive.");
+      });
+
       laughButton.addEventListener("click", () => {
-        setFanMode("laugh", "Laughter response simulated — quick, short staccato bursts.");
+        setFanMode("laugh", "Joyful cue simulated — rhythmic, fast staccato airflow.");
+        setPanelFeedback("Joyful cue simulated. Fan response: rhythmic, fast staccato.");
       });
 
       cryButton.addEventListener("click", () => {
-        setFanMode("cry", "Crying response simulated — slow, gentle staccato bursts.");
+        setFanMode("cry", "Sad cue simulated — slow, gentle staccato as blade speed decreases.");
+        setPanelFeedback("Sad cue simulated. Fan response: slow staccato and decreasing blade speed.");
       });
 
-      awayButton.addEventListener("click", () => {
+      swingButton.addEventListener("click", () => {
+        setFanMode("swing", "Swinging simulated — integrated fans alternate from side to side.");
+        setPanelFeedback("Swinging simulated by alternating the integrated fans.");
+      });
+
+      restButton.addEventListener("click", () => {
         isPresent = false;
         fan.classList.remove("presence-detected");
         presenceButton.textContent = "Simulate presence detected";
-        setFanMode("reverse", "Simulated: room empty for 5 hours — fast reverse airflow.");
+        setFanMode("standby", "Resting simulated — fan off and facing forward.");
+        setPanelFeedback("Fan resting, facing forward. Fan output is simulated.");
       });
+
+      messageButton.addEventListener("click", showMessageAndPoem);
+      breathButton.addEventListener("click", enableBreathSensing);
+      dismissPoemButton.addEventListener("click", () => clearPoem("Poem cleared manually."));
 
       resetButton.addEventListener("click", () => {
         if (isListening) recognition.abort();
+        stopBreathSensing();
+        clearPoem("No message waiting.");
         isPresent = false;
         fan.classList.remove("presence-detected");
         presenceButton.textContent = "Simulate presence detected";
         setFanMode("standby", "The fan is in standby.");
+        setPanelFeedback("Resting, facing forward. No fan command has been sent.");
       });
 
       if (!SpeechRecognition) {

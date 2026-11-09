@@ -4,7 +4,7 @@ The fan is an expressive companion: it notices a person, listens only when
 invited, and responds with poetry. The browser page is a visual prototype; it
 does not control an appliance or detect people automatically.
 
-## Important NORTHSKY compatibility and mounting limits
+## NORTHSKY ceiling-hung school concept
 
 The user-provided product details identify the NORTHSKY NSS-WM12 / retail SKU
 20198251875 as a 120 V AC, 60 Hz, UL-listed, three-speed wall/workstation fan
@@ -12,13 +12,13 @@ with a manual pull chain and tilt bracket. The reported airflow and motor
 ratings vary by product listing; confirm them against the exact fan's label
 and manual before purchase or installation.
 
-This is a **wall-mount fan**, not a ceiling fixture. UL listing alone does not
-approve overhead suspension. Do not hang it from the ceiling, attach a display
-or microphone to its grille or housing, or let it swing. Use it only with its
-manufacturer-approved wall bracket and mounting method unless NORTHSKY
-provides written approval and a specified overhead kit for this exact model.
-For a lighting-fixture appearance, choose a fan explicitly listed and
-manufacturer-approved for ceiling suspension instead.
+For this school exercise, the user says overhead use has been approved. The
+web illustration now models the fan as suspended from a ceiling canopy, with
+the display, microphone, and controls together in a separate-looking panel
+beneath the fan. This is a visual concept, not a verification of the approval,
+manufacturer mounting kit, building support, or finished installation. The
+approval and mounting method apply to the real product only as specified by
+the responsible school/installer and fan documentation.
 
 The pull-chain motor has no confirmed electronic control input. Neither a
 Raspberry Pi nor an Arduino may be connected directly to the 120 V fan, pull
@@ -51,9 +51,8 @@ sensors; fan states are visual simulations.
    provide this behavior.
 5. After two continuous hours of confirmed room occupancy without a detected
    blow, show an irritated poem/animation. Reset this timer after a detected
-   blow or confirmed room-empty state. Do not physically swing this wall fan.
-   Its tilt bracket is manual; a swinging suspended appliance is not a safe
-   substitute for a visual animation.
+   blow or confirmed room-empty state. The browser may animate a small
+   illustrative swing; it does not actuate a physical fan mount.
 6. A displayed poem dissipates when breath is detected, using the p5.js
    particle effect. The app should show when sensing is enabled and provide a
    manual clear/stop option.
@@ -84,7 +83,7 @@ datasheets before ordering.
 | 1 | Optional Arduino Nano ESP32 | Not required if the Pi reads the low-voltage sensors directly. If used, power from its documented USB-C input (5 V); keep its GPIO at 3.3 V logic. It must not switch or connect to the fan's mains circuit. |
 | 1 each | Short HDMI cable, USB-A-to-USB cable for display (if specified), USB microphone cable, USB-C Pi power cable, sensor pigtails | Use the connectors and lengths specified by the selected display/sensor. Secure strain relief in the panel. |
 | as needed | Low-voltage rated enclosure, cable glands/strain relief, standoffs, fasteners, labels | Enclose and support the display electronics and separate low-voltage wiring. Select enclosure and mounting hardware for the actual panel and location. |
-| 1 | NORTHSKY-approved wall bracket and manufacturer-specified fasteners | Use only as directed in the fan manual and for the actual wall construction. The panel must have its own independently supported mount unless NORTHSKY explicitly approves attaching its load to the fan bracket. |
+| 1 | Approved overhead suspension kit and specified fasteners for this exact fan, if available | The user reports school approval for the concept. Confirm the actual fan mounting kit, orientation, support, and permitted loads with the responsible installer; do not infer them from this illustration. |
 | 1 | Manufacturer-approved, listed fan controller (only if NORTHSKY confirms compatibility in writing) | Required before any automatic on/off or speed control. Exact model and interface remain unknown; do not substitute a generic relay or dimmer. Have the control and mains installation handled by a qualified electrician. |
 
 ### Low-voltage wiring and color convention
@@ -101,32 +100,27 @@ prototype wiring low voltage and physically separate from the appliance's
 electrician must follow local code, the appliance instructions, and the
 approved controller documentation.
 
-### Materials if a ceiling-fixture appearance is required
+### Ceiling-suspended concept materials
 
-There is **no safe hanging-material list for the NSS-WM12**: it is described as
-a wall-mount fan, and no overhead kit or approval has been provided. Do not
-hang it from a hook, cord, chain, lighting canopy, or improvised bracket. For a
-replacement fan explicitly approved for ceiling installation, have the
-manufacturer and installer specify the compatible factory mounting kit,
-structural support/fan-rated box if required by that model and building,
-manufacturer-specified fasteners, canopy, and any required secondary restraint.
-The display panel needs its own support rated for its weight; do not suspend
-it from the fan or attach it to the fan's grille. Exact support materials
-depend on the replacement product, ceiling construction, and local code.
+The concept is depicted with a ceiling canopy, suspension member, fan, and
+display/control panel below. The exact real suspension materials cannot be
+selected from the supplied fan description alone. Use the mounting kit and
+support method identified by the approving school/installer and the fan
+documentation; the decorative canopy in the illustration is not a structural
+part. Specify the panel's support and attachment separately from the fan
+mount.
 
 ## Installation sequence
 
 ### 1. Confirm a safe appliance/mounting combination
 
 1. Photograph the fan nameplate and find the exact NSS-WM12 manual.
-2. Ask NORTHSKY whether this exact wall-mount model is approved for the
-   proposed location, what bracket and fasteners it requires, and whether a
-   listed controller supports automatic power and speed changes. Obtain
-   written confirmation and the controller part number.
-3. Unless NORTHSKY expressly approves overhead mounting and provides its
-   specified kit, stop the ceiling-fixture plan. Install the fan only on the
-   approved wall bracket. For a ceiling-hung look, substitute a
-   ceiling-rated fan/fixture.
+2. Record the school's approval, the exact overhead mounting method and
+   permitted orientation for this fan, the specified support hardware, and
+   any conditions for the installation.
+3. Confirm whether an approved controller supports automatic power and speed
+   changes. The pull-chain motor alone does not provide a known electronic
+   control interface.
 4. Have a qualified installer verify the building structure, fan location,
    electrical supply, clearances, and local permit/code requirements. Do not
    treat a sensor cutoff as protection from contact with fan blades.
@@ -166,8 +160,8 @@ depend on the replacement product, ceiling construction, and local code.
 
 ### 4. Commission any real fan control
 
-1. Do not proceed unless NORTHSKY has confirmed a specific listed controller
-   for this fan and the approved wall-mounted installation.
+1. Do not proceed unless the responsible installer has approved the exact
+   controller for this fan and its approved installation.
 2. Have a qualified electrician install and test the fan and controller
    according to the manufacturer's instructions and local electrical code.
    This guide intentionally does not give mains wiring or conductor-color

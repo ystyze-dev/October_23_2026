@@ -225,9 +225,10 @@
         animation: cry-staccato 2.8s linear infinite;
       }
 
-      .fan[data-mode="swing"] svg {
+      .fan[data-mode="swing"] .hanging-assembly {
         animation: swing 1.7s ease-in-out infinite alternate;
-        transform-origin: 50% 30%;
+        transform-box: view-box;
+        transform-origin: 250px 7px;
       }
 
       .fan.presence-detected .sensor-wave {
@@ -869,27 +870,27 @@
             <p>A soft breath stirs a poem into motion on the fan’s display.</p>
           </article>
 
-          <div class="fan" id="fan" data-mode="standby" role="img" aria-label="Concept illustration of a wall-mount fan; not a mounting plan">
+          <div class="fan" id="fan" data-mode="standby" role="img" aria-label="Concept illustration of a ceiling-suspended fan with a display and microphone panel beneath it">
             <svg viewBox="0 0 500 590" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
                 <linearGradient id="grille" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0" stop-color="#edf0eb"></stop>
                   <stop offset="1" stop-color="#cbd3cb"></stop>
                 </linearGradient>
-                <linearGradient id="stand" x1="0" y1="0" x2="1" y2="0">
+                <linearGradient id="suspension" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0" stop-color="#c0c9c1"></stop>
                   <stop offset=".48" stop-color="#f0f1ec"></stop>
                   <stop offset="1" stop-color="#bcc6bd"></stop>
                 </linearGradient>
               </defs>
 
-              <ellipse cx="250" cy="563" rx="105" ry="13" fill="#dfe2dc"></ellipse>
-              <path d="M230 388h40v136c0 8-6 14-14 14h-12c-8 0-14-6-14-14z" fill="url(#stand)" stroke="#b9c2ba" stroke-width="2"></path>
-              <path d="M183 532c0-12 10-21 22-21h90c12 0 22 9 22 21v10H183z" fill="#dce1db" stroke="#bcc5bd" stroke-width="2"></path>
-              <path d="M174 542h152c8 0 14 6 14 13v4H160v-4c0-7 6-13 14-13z" fill="#cbd3cc"></path>
+              <path d="M0 5h500" stroke="#d8dcd6" stroke-width="3"></path>
+              <g class="hanging-assembly">
+              <path d="M205 7c0-4 3-7 7-7h76c4 0 7 3 7 7v7h-90z" fill="#dce1db" stroke="#aeb9b0" stroke-width="2"></path>
+              <path d="M239 14h22v22h-22z" fill="url(#suspension)" stroke="#aeb9b0" stroke-width="2"></path>
+              <path d="M232 30h36v14h-36z" fill="#cbd3cc" stroke="#aeb9b0" stroke-width="2"></path>
 
-              <path d="M239 376v-20c0-11 9-20 20-20h25" fill="none" stroke="#b9c2ba" stroke-width="13" stroke-linecap="round"></path>
-              <circle cx="284" cy="335" r="10" fill="#dce1db" stroke="#b9c2ba" stroke-width="2"></circle>
+              <path d="M217 348v34m66-34v34" fill="none" stroke="#9eaaa0" stroke-width="5"></path>
 
               <circle cx="250" cy="207" r="174" fill="url(#grille)" stroke="#aeb9b0" stroke-width="9"></circle>
               <circle cx="250" cy="207" r="162" fill="#e7ebe5" stroke="#f7f8f5" stroke-width="3"></circle>
@@ -922,10 +923,21 @@
                 <circle cx="250" cy="54" r="35"></circle>
               </g>
 
-              <rect x="224" y="381" width="52" height="7" rx="3.5" fill="#61746a"></rect>
-              <circle cx="250" cy="384.5" r="1.5" fill="#d7f0df"></circle>
+              <path d="M217 382v19m66-19v19" stroke="#9eaaa0" stroke-width="4"></path>
+              <rect x="164" y="398" width="172" height="91" rx="10" fill="#dce1db" stroke="#aeb9b0" stroke-width="3"></rect>
+              <rect x="177" y="409" width="146" height="59" rx="5" fill="#29312c"></rect>
+              <path d="M190 426h58m-58 9h77m-77 9h47" stroke="#c1d9c7" stroke-width="2" stroke-linecap="round" opacity=".8"></path>
+              <circle cx="301" cy="426" r="3" fill="#9bc6ad"></circle>
+              <g fill="#839188">
+                <circle cx="284" cy="448" r="1.4"></circle>
+                <circle cx="292" cy="448" r="1.4"></circle>
+                <circle cx="300" cy="448" r="1.4"></circle>
+                <circle cx="308" cy="448" r="1.4"></circle>
+              </g>
+              <text x="250" y="480" text-anchor="middle" fill="#456b56" font-size="7" font-family="Arial, sans-serif" letter-spacing="1">DISPLAY · MIC · CONTROLS</text>
+              </g>
             </svg>
-            <span class="product-caption">Aera · attentive by nature</span>
+            <span class="product-caption">Aera · ceiling-suspended concept</span>
           </div>
 
           <article class="feature">
@@ -1011,7 +1023,7 @@
           <span class="detail-mark" aria-hidden="true">05</span>
           <div>
             <h2>Display panel below the fan</h2>
-            <p>The display and microphone belong in a separate, independently supported panel below the fan. The NORTHSKY is wall-mount, not a ceiling fixture; show two-hour irritation as a screen animation, never by swinging the appliance.</p>
+            <p>The ceiling-hung concept places the display, microphone, and controls together in a panel below the fan. The two-hour irritation cue is modeled as a gentle visual swing; the diagram is illustrative, not a mounting plan.</p>
           </div>
         </article>
       </section>
@@ -1020,9 +1032,9 @@
         <p class="eyebrow">Raspberry Pi control panel</p>
         <h2 id="sketch-title">A message carried on the breeze.</h2>
         <p class="sketch-intro">
-          A proposed panel beneath the wall-mounted fan brings together the
-          display, microphone, and status indicators. The browser demo below
-          does not connect to a Raspberry Pi, Arduino, sensors, or fan motor.
+          A proposed panel beneath the ceiling-suspended fan brings together
+          the display, microphone, and status indicators. The browser demo
+          below does not connect to a Raspberry Pi, Arduino, sensors, or motor.
         </p>
         <div class="control-panel" role="region" aria-label="Raspberry Pi fan and microphone control panel prototype">
           <div class="panel-toolbar">
@@ -1086,7 +1098,7 @@
       </section>
 
       <p class="page privacy-note">
-        This is a visual simulation, not hardware control. The NORTHSKY NSS-WM12 described by the owner is a 120 V wall-mount fan with a manual pull chain; ceiling suspension and electronic speed control have not been approved. Do not connect a Pi or Arduino to its mains circuit. Voice and breath sensing are opt-in browser features.
+        This is a visual simulation, not hardware control. The NORTHSKY NSS-WM12 was described as a 120 V wall/workstation fan with a manual pull chain; this school concept models it ceiling-suspended per the user's stated approval, without validating a mounting method or electronic speed control. Do not connect a Pi or Arduino to its mains circuit. Voice and breath sensing are opt-in browser features.
       </p>
     </main>
 
@@ -1365,7 +1377,7 @@
         }
 
         if (/\b(swing|swinging)\b/.test(normalized)) {
-          requestFanMode("swing", "Irritated animation simulated — the physical fan does not swing.", "Display-only swing animation; the wall fan must remain fixed.");
+          requestFanMode("swing", "Irritated ceiling-hang swing simulated; no physical movement command is sent.", "The illustration swings around the canopy; no hardware movement command was sent.");
           return;
         }
 
@@ -1635,7 +1647,7 @@
       });
 
       swingButton.addEventListener("click", () => {
-        requestFanMode("swing", "Two-hour irritation simulated — display animation only; the physical fan stays fixed.", "Display-only irritated animation simulated after two hours without a blow.");
+        requestFanMode("swing", "Two-hour irritation simulated — the illustrated fan swings gently.", "Illustrated swing simulated after two hours without a blow; no hardware movement command was sent.");
       });
 
       restButton.addEventListener("click", () => {

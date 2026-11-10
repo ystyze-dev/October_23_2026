@@ -852,7 +852,7 @@
     <main>
       <section class="page hero" id="top" aria-labelledby="hero-title">
         <p class="eyebrow">A more expressive kind of comfort</p>
-        <h1 id="hero-title">A fan that turns breath into poetry.</h1>
+        <h1 id="hero-title">A suspended fan that turns breath into poetry.</h1>
         <p class="hero-intro">
           A breeze shapes its movement, laughter sets its rhythm, and breath
           brings poetry to life.
@@ -867,7 +867,7 @@
               </svg>
             </span>
             <h2>Breath becomes poetry.</h2>
-            <p>A soft breath stirs a poem into motion on the fan’s display.</p>
+            <p>A soft breath stirs a poem on the display, beneath a forward-facing fan.</p>
           </article>
 
           <div class="fan" id="fan" data-mode="standby" role="img" aria-label="Concept illustration of a ceiling-suspended fan with a display and microphone panel beneath it">
@@ -975,16 +975,17 @@
           <button class="demo-button" type="submit">Send</button>
         </form>
         <p class="demo-status" id="demo-status" role="status" aria-live="polite">Fan off — no room presence or distance reading is connected.</p>
-        <button class="presence-demo" id="presence-demo" type="button">Simulate person in room, 2 ft away</button>
+        <button class="presence-demo" id="presence-demo" type="button">Simulate person in room, 5 ft away</button>
 
         <div class="response-demo" aria-label="Simulate voice and absence responses">
           <p>Preview sensor and response states (simulation only)</p>
           <div class="response-buttons">
-            <button class="demo-button" id="approach-demo" type="button">Simulate 2 ft: attentive</button>
+            <button class="demo-button" id="approach-demo" type="button">Simulate approach at 5 ft</button>
+            <button class="demo-button" id="far-demo" type="button">Simulate person at 10 ft: wait for blow</button>
             <button class="demo-button" id="close-demo" type="button">Simulate under 2 ft: off</button>
             <button class="demo-button" id="attentive-demo" type="button">Simulate speech cue</button>
-            <button class="demo-button" id="laugh-demo" type="button">Simulate laughter</button>
-            <button class="demo-button" id="swing-demo" type="button">Simulate 2 hours without a blow</button>
+            <button class="demo-button" id="laugh-demo" type="button">Simulate laughter: fast staccato</button>
+            <button class="demo-button" id="swing-demo" type="button">Simulate laughter lasting over 2 minutes</button>
             <button class="demo-button" id="rest-demo" type="button">Simulate room empty: off</button>
           </div>
         </div>
@@ -995,14 +996,14 @@
           <span class="detail-mark" aria-hidden="true">01</span>
           <div>
             <h2>Off when the room is empty</h2>
-            <p>Room occupancy is simulated here. A real setup needs a tested occupancy sensor and conservative timeout; no presence, stale data, or sensor fault must request off.</p>
+            <p>Room occupancy is simulated here. A real setup needs a tested presence sensor; no presence, stale data, or sensor fault must request off.</p>
           </div>
         </article>
         <article class="detail">
           <span class="detail-mark" aria-hidden="true">02</span>
           <div>
-            <h2>Attentive at 2 ft; off inside</h2>
-            <p>The requested behavior is attentive at about 2 ft (0.61 m), with a conservative off response when closer than 2 ft. A hobby sensor is not a safety-rated protective device.</p>
+            <h2>Approach on; closer than 2 ft off</h2>
+            <p>In this concept, 2–8 ft is the approach zone: motion toward the fan starts airflow. At less than 2 ft, fan and swing stop. Over 8 ft, it waits quietly for a blow.</p>
           </div>
         </article>
         <article class="detail">
@@ -1022,8 +1023,8 @@
         <article class="detail">
           <span class="detail-mark" aria-hidden="true">05</span>
           <div>
-            <h2>Display panel below the fan</h2>
-            <p>The ceiling-hung concept places the display, microphone, and controls together in a panel below the fan. The two-hour irritation cue is modeled as a gentle visual swing; the diagram is illustrative, not a mounting plan.</p>
+            <h2>A caged, suspended fan</h2>
+            <p>A protective structure contains a forward-facing fan; a separately engineered pivot and actuator swing the assembly forward and back. Blade count does not create swing. The panel and microphone sit below the fan.</p>
           </div>
         </article>
       </section>
@@ -1032,9 +1033,10 @@
         <p class="eyebrow">Raspberry Pi control panel</p>
         <h2 id="sketch-title">A message carried on the breeze.</h2>
         <p class="sketch-intro">
-          A proposed panel beneath the ceiling-suspended fan brings together
-          the display, microphone, and status indicators. The browser demo
-          below does not connect to a Raspberry Pi, Arduino, sensors, or motor.
+          A proposed panel beneath a caged, ceiling-suspended, forward-facing
+          fan brings together the display, microphone, and status indicators.
+          The browser demo does not connect to a Raspberry Pi, Arduino, sensors,
+          fan motor, or swing actuator.
         </p>
         <div class="control-panel" role="region" aria-label="Raspberry Pi fan and microphone control panel prototype">
           <div class="panel-toolbar">
@@ -1082,6 +1084,7 @@
               </section>
               <div class="panel-actions" aria-label="Control panel prototype actions">
                 <button class="demo-button" id="message-demo" type="button">Simulate message while away</button>
+                <button class="demo-button" id="blow-demo" type="button" aria-controls="panel-poem">Simulate a blow</button>
                 <button class="demo-button" id="breath-demo" type="button" aria-controls="panel-poem">Enable breath detection</button>
                 <button class="demo-button" id="dismiss-poem" type="button" aria-controls="panel-poem" hidden>Clear poem manually</button>
               </div>
@@ -1098,7 +1101,7 @@
       </section>
 
       <p class="page privacy-note">
-        This is a visual simulation, not hardware control. The NORTHSKY NSS-WM12 was described as a 120 V wall/workstation fan with a manual pull chain; this school concept models it ceiling-suspended per the user's stated approval, without validating a mounting method or electronic speed control. Do not connect a Pi or Arduino to its mains circuit. Voice and breath sensing are opt-in browser features.
+        This is a visual simulation, not hardware control. Select a forward-facing fan and caged suspension assembly explicitly approved for the overhead orientation, with a manufacturer-supported control interface. Do not connect a Pi or Arduino directly to a mains fan. Voice and breath sensing are opt-in browser features.
       </p>
     </main>
 
@@ -1114,6 +1117,7 @@
       const presenceButton = document.querySelector("#presence-demo");
       const resetButton = document.querySelector("#reset-demo");
       const approachButton = document.querySelector("#approach-demo");
+      const farButton = document.querySelector("#far-demo");
       const closeButton = document.querySelector("#close-demo");
       const attentiveButton = document.querySelector("#attentive-demo");
       const laughButton = document.querySelector("#laugh-demo");
@@ -1129,6 +1133,7 @@
       const panelMessage = document.querySelector("#panel-message");
       const panelPoem = document.querySelector("#panel-poem");
       const messageButton = document.querySelector("#message-demo");
+      const blowButton = document.querySelector("#blow-demo");
       const breathButton = document.querySelector("#breath-demo");
       const dismissPoemButton = document.querySelector("#dismiss-poem");
       const breathStatus = document.querySelector("#breath-status");
@@ -1301,7 +1306,7 @@
         panelFanIndicator.textContent = mode === "standby" ? "Fan resting" : `Fan ${mode}`;
       }
 
-      function requestFanMode(mode, message, feedback) {
+      function requestFanMode(mode, message, feedback, allowFarBlow = false) {
         if (!isPresent) {
           setFanMode("standby", "No room presence detected — fan off.");
           setPanelFeedback("Fan remains off because room presence is not detected.");
@@ -1315,6 +1320,11 @@
         if (simulatedDistance < 2) {
           setFanMode("standby", "Person is closer than 2 ft — safety off.");
           setPanelFeedback("Fan remains off because the simulated distance is under 2 ft.");
+          return;
+        }
+        if (simulatedDistance > 8 && !allowFarBlow && mode !== "swing") {
+          setFanMode("attentive", "Person is over 8 ft away — attentive mode, blades stopped until a blow.");
+          setPanelFeedback("Poem waiting. Fan blades are stopped until a blow is detected.");
           return;
         }
         setFanMode(mode, message);
@@ -1338,7 +1348,7 @@
         }
       }
 
-      function simulateDistance(distance) {
+      function simulateDistance(distance, isApproaching = false) {
         isPresent = true;
         simulatedDistance = distance;
         fan.classList.add("presence-detected");
@@ -1348,8 +1358,19 @@
           setPanelFeedback("Under-2-ft cutoff simulated. Fan remains off.");
           return;
         }
-        setFanMode("attentive", `Person is ${distance} ft away — attentive mode simulated; hardware is not connected.`);
-        setPanelFeedback("Occupancy and distance simulated. Fan output is not connected to this demo.");
+        if (distance > 8) {
+          setFanMode("attentive", `Person is ${distance} ft away — attentive, blades stopped; blow to resume.`);
+          setPanelFeedback("Person is in the room but outside the 8 ft approach zone. Poetry is waiting for a blow.");
+          showMessageAndPoem();
+          return;
+        }
+        if (isApproaching) {
+          setFanMode("command", `Person is approaching at ${distance} ft — airflow on (simulated).`);
+          setPanelFeedback("Approach detected in the 2–8 ft zone. Airflow is simulated.");
+          return;
+        }
+        setFanMode("attentive", `Motion sensed at ${distance} ft — attentive; blades stopped until approach.`);
+        setPanelFeedback("Motion sensed. Fan is attentive but airflow is paused until approach.");
       }
 
       function interpretCommand(command) {
@@ -1372,7 +1393,7 @@
         }
 
         if (/\b(approach|approaching|closer|close|nearby)\b/.test(normalized)) {
-          simulateDistance(2);
+          simulateDistance(5, true);
           return;
         }
 
@@ -1509,6 +1530,18 @@
         setPanelFeedback("Breath detected by microphone. The bilingual poem dissipated in the p5.js display.");
       }
 
+      function respondToBlow() {
+        requestFanMode("command", "Blow detected — poem dissipates and airflow resumes (simulated).", "Blow detected. Poem dissipating; airflow resumes unless room is empty or person is under 2 ft.", true);
+        if (!poemIsVisible) return;
+        if (poemSketch) {
+          breathStatus.textContent = "Blow detected. Watch the p5.js display as the poem dissipates.";
+          panelMessage.textContent = "Blow detected — the poem is dissipating.";
+          poemSketch.dissipatePoem();
+        } else {
+          clearPoem("The poem was cleared after a blow; the p5.js animation was unavailable.");
+        }
+      }
+
       function setUrgency(value) {
         urgencyProgress.value = value;
         urgencyValue.value = `${value}%`;
@@ -1536,16 +1569,7 @@
           if (loudBreathFrames >= 4) {
             breathDetected = true;
             loudBreathFrames = 0;
-            requestFanMode("attentive", "Breath-like sound detected — attentive response simulated.", "Breath-like sound detected; fan response remains subject to presence and distance.");
-            if (poemIsVisible) {
-              if (poemSketch) {
-                breathStatus.textContent = "Breath detected. Watch the p5.js display as the poem dissipates.";
-                panelMessage.textContent = "Breath detected — the poem is dissipating.";
-                poemSketch.dissipatePoem();
-              } else {
-                clearPoem("The poem was cleared after breath detection; the p5.js animation was unavailable.");
-              }
-            }
+            respondToBlow();
           }
         }
         breathFrame = window.requestAnimationFrame(monitorBreath);
@@ -1599,8 +1623,19 @@
         panelTranscript.textContent = "No speech captured. This message is a proximity reminder.";
         panelTranscript.classList.add("panel-muted");
         setRecognitionConfidence(undefined);
-        setPanelFeedback("Person away too long — message waiting. The fan signals urgency and invites the person to come closer.");
-        setFanMode("urgent", "Message waiting — urgency simulated while the person is away. Come closer to receive the poem.");
+        if (!isPresent || simulatedDistance === null) {
+          setFanMode("standby", "No room presence or distance reading — fan off; poem waiting.");
+          setPanelFeedback("Poem displayed while the fan remains off because presence/distance are unknown.");
+        } else if (simulatedDistance < 2) {
+          setFanMode("standby", "Person is closer than 2 ft — fan off; poem waiting.");
+          setPanelFeedback("Poem displayed. Fan remains off inside the 2 ft cutoff.");
+        } else if (simulatedDistance > 8) {
+          setFanMode("attentive", "Person is over 8 ft away — attentive, blades stopped until a blow.");
+          setPanelFeedback("Person is in the room but outside the 8 ft approach zone. Poetry is waiting for a blow.");
+        } else {
+          setFanMode("attentive", "Poem waiting — fan attentive; approach or blow to resume airflow.");
+          setPanelFeedback("Poem displayed. Fan is attentive in the 2–8 ft zone.");
+        }
         breathStatus.textContent = breathStream
           ? "Breath detection is active. Blow gently toward the microphone to clear the poem."
           : "Enable breath detection to let the microphone notice breathing; blow gently to clear the poem.";
@@ -1627,15 +1662,16 @@
           isPresent = false;
           simulatedDistance = null;
           fan.classList.remove("presence-detected");
-          presenceButton.textContent = "Simulate person in room, 2 ft away";
+          presenceButton.textContent = "Simulate person in room, 5 ft away";
           setFanMode("standby", "No room presence detected — fan off.");
           setPanelFeedback("Room-empty state simulated. Fan remains off.");
         } else {
-          simulateDistance(2);
+          simulateDistance(5);
         }
       });
 
-      approachButton.addEventListener("click", () => simulateDistance(2));
+      approachButton.addEventListener("click", () => simulateDistance(5, true));
+      farButton.addEventListener("click", () => simulateDistance(10));
       closeButton.addEventListener("click", () => simulateDistance(1.5));
 
       attentiveButton.addEventListener("click", () => {
@@ -1647,19 +1683,20 @@
       });
 
       swingButton.addEventListener("click", () => {
-        requestFanMode("swing", "Two-hour irritation simulated — the illustrated fan swings gently.", "Illustrated swing simulated after two hours without a blow; no hardware movement command was sent.");
+        requestFanMode("swing", "Sustained laughter over 2 minutes — illustrated assembly swings (simulated).", "Sustained laughter response simulated. Swing requires a separately rated mechanism; no hardware movement command was sent.");
       });
 
       restButton.addEventListener("click", () => {
         isPresent = false;
         simulatedDistance = null;
         fan.classList.remove("presence-detected");
-        presenceButton.textContent = "Simulate person in room, 2 ft away";
+        presenceButton.textContent = "Simulate person in room, 5 ft away";
         setFanMode("standby", "Room empty — fan off (simulated).");
         setPanelFeedback("Room-empty state simulated. Fan output is not connected.");
       });
 
       messageButton.addEventListener("click", showMessageAndPoem);
+      blowButton.addEventListener("click", respondToBlow);
       breathButton.addEventListener("click", enableBreathSensing);
       dismissPoemButton.addEventListener("click", () => clearPoem("Poem cleared manually."));
 
@@ -1670,7 +1707,7 @@
         isPresent = false;
         simulatedDistance = null;
         fan.classList.remove("presence-detected");
-        presenceButton.textContent = "Simulate person in room, 2 ft away";
+        presenceButton.textContent = "Simulate person in room, 5 ft away";
         setFanMode("standby", "Fan off — no room presence or distance reading is connected.");
         setPanelFeedback("Fan off. Sensor readings and appliance control are not connected.");
       });

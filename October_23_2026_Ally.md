@@ -2,236 +2,252 @@
 
 The fan is an expressive companion: it notices a person, listens only when
 invited, and responds with poetry. The browser page is a visual prototype; it
-does not control an appliance or detect people automatically.
+does not control an appliance or detect people automatically. The proposed
+appliance is a four-motor, forward-facing propeller assembly in a spherical
+containment cage, suspended from the ceiling, with a display and microphone
+panel below it.
 
 ## Project definition
 
-The chosen appliance is **not the NORTHSKY wall/workstation fan**. Select one
-forward-facing fan whose manufacturer explicitly approves the exact overhead
-orientation, cage, and suspension arrangement. The fan axis should point
-horizontally into the room; the blades should not blow down like a conventional
-ceiling fan. The protective cage contains the fan. A separate, engineered
-hanger/pivot and suitable actuator swing the contained fan assembly forward
-and back. Blade count does not make a fan swing.
+The concept has four matched propeller motors on a cross, with all propellers
+facing forward. The intended control groups are **north + west** and
+**south + east**. The intended motion is forward and back, created by changing
+thrust between those groups. This is not yet a validated mechanism: thrust
+imbalance may cause rotation, roll, vibration, or uncontrolled pendulum motion
+instead of a predictable forward/back swing. A qualified mechanical and
+controls engineer must establish whether this concept can be made stable,
+guarded, and safe before motors or propellers are operated.
 
-The display, microphone, motion/distance sensors, and controller live in a
-panel below the fan, with attachment and load support approved separately.
-Choose a fan/controller with a documented, isolated low-voltage speed/control
-interface compatible with a Pi interface (for example, manufacturer-documented
-Modbus RTU/RS-485 or 0–10 V input). A Pi GPIO must never connect directly to
-fan motor or mains wiring. A listed fan with only a pull chain or IR remote
-does not meet the automatic-control requirement unless its manufacturer
-documents an approved interface.
+The propellers must be fully contained by a professionally designed,
+fragment-resistant spherical cage; a decorative grille is not containment.
+The cage, cross, motors, suspension, restraints, and support structure must be
+engineered and approved as one overhead assembly. Do not test exposed drone
+propellers, suspend an improvised assembly over people, or use propeller thrust
+as the only means of preventing a fall or collision. If a safe thrust-based
+motion system cannot be validated, use a certified oscillating fan or a
+separately engineered movement mechanism instead.
+
+The Arduino is the local motor-control processor, not a safety certification
+or a ceiling/mains controller. A separately specified Raspberry Pi runs the
+display, local sensor service, and user interface. An approved motor driver
+for each motor and a hardware emergency stop / energy-isolation system are
+required; the exact board, drivers, power system, and interfaces depend on
+the selected motors and engineering review. Never connect a motor to an
+Arduino GPIO or improvise a power stage.
+
+The display, microphone, people-presence sensors, and controller may be
+carried below the spherical cage only if the engineer approves that added
+load, attachment, cable routing, and clearance. The browser page needs a
+separate local service on the Pi to receive actual sensor readings and issue
+approved low-voltage control requests. It must not control the motor power
+directly.
 
 ## Intended interaction
 
-1. If no person is in the room, fan motor and swing actuator are off. If the
-   person is closer than 2 ft (0.61 m), both stop as a project behavior; this
-   hobby sensor is not a certified personnel-protection device.
-2. At 2–8 ft, motion detection makes the fan attentive with blades stopped.
-   Motion classified as approach toward the fan turns on the fan. Motion
-   direction must be determined from successive distance readings, not a
-   single motion event.
-3. If the person is in the room but farther than 8 ft, keep the fan attentive
-   but stop the blades and display a mixed English/Spanish poem. A deliberate
-   blow at the panel microphone dissipates the poem and restarts airflow,
-   unless the person is absent, under 2 ft, or a sensor/controller fault exists.
-4. Laughter requests fast staccato fan speed. Sustained laughter for more than
-   2 minutes additionally starts the rated swing mechanism. Empty-room and
-   under-2-ft off conditions take precedence. Audio loudness alone is not
-   reliable laughter recognition; production control needs validated
-   processing, an explicit button interaction, or another reviewed input.
-5. Any uncertain presence/distance reading, sensor failure, reboot, or
-   controller fault must fail off. Preserve the fan guard and an independent
-   physical stop/disconnect.
-6. Swing is an independent motion of the approved caged assembly, not the
-   number or rotation of fan blades. Its pivot, restraint, actuator, travel
-   stops, and control must be rated for the assembly by the responsible
-   mechanical installer. Do not implement swing by dangling a running fan on
-   an improvised cable.
+1. A room-presence sensor detects occupancy, including a person sitting still.
+   A separate range sensor may estimate distance and approach direction.
+   These are interaction inputs only, not personnel-protection devices.
+2. With no person present, an unknown/faulted sensor, controller fault, or
+   emergency stop, the motor command is off. A prototype may simulate these
+   states before any motor hardware is enabled.
+3. If present, the fan may show an attentive state. The proposed 2 ft and
+   8 ft thresholds remain configurable interaction choices, not safe
+   operating distances. Do not use them to protect people from propellers.
+4. A deliberate blow may dismiss the poem. Laughter may request a playful
+   response only after validated, consent-based detection; audio loudness
+   alone does not reliably identify either event.
+5. Any motion command must remain disabled until a qualified engineer has
+   validated the thrust/control concept, complete containment, and independent
+   stop behavior. Do not make a sensor failure or reboot cause a motor start.
 
-Presence, distance, breath, and laughter inputs are not safety-rated. Sensor
-failure, loss of power, reboot, unknown distance, and disagreement between
-sensors must never cause a fan start. The intended fail-safe state is fan
-power off; the controller cannot implement that until a compatible certified
-control interface is established.
+Presence, distance, breath, and laughter inputs are not safety-rated. The
+assembly needs an independent physical emergency stop and a safe, engineered
+means of isolating motor energy. Software cannot substitute for containment,
+structural design, or a certified safety system.
 
-## Suggested prototype hardware
+## Parts list
 
-These are low-voltage prototype parts, not a finished fan-control system.
-Confirm connector, power, and mounting details against the exact part
-datasheets before ordering.
+The first list is for building and testing automatic detection, the display,
+and the Pi-to-Arduino software link on a bench. It does not require motor
+power or propellers. The second list is for a later motor-control phase; its
+power and driver parts must match the exact motors and drivers you select.
 
-| Qty | Part | Purpose and requirements |
+### Buy for the sensor and software prototype
+
+| Qty | Part | Notes |
 |---:|---|---|
-| 1 | Forward-facing directional fan with protective cage | Select a model whose maker permits the intended horizontal-axis suspended use, cage, and required orientation; verify airflow for the 3.5 m room and check its motor/control documentation. Candidate research is pending. |
-| 1 | Raspberry Pi 5, 4 GB | Runs the local web UI, p5.js visualization, poem selection, and sensor application. No mains switching. |
-| 1 | Raspberry Pi 27 W USB-C Power Supply, region-matched | Dedicated 5.1 V / 5 A USB-C Pi supply. Do not power the fan from it. |
-| 1 | 64 GB high-endurance microSD card and compatible reader | Pi OS and local poems; the reader is needed to prepare the card from a computer if one is not built in. |
-| 1 | Raspberry Pi case with Pi 5 cooling (case fan/heatsink) | Protects and cools the controller. Keep it in the low-voltage panel, clear of the appliance fan motor and airflow obstructions. |
-| 1 | 5-inch HDMI touchscreen with documented 5 V USB power input | Mount in the separate display/control panel below the fan; confirm panel dimensions and current draw. Include its maker-specified certified 5 V supply if required; do not assume the Pi can power the display over USB. |
-| 1 | USB digital microphone with physical mute switch | USB-powered (typically 5 V); verify the selected model. Mount in the panel, not at the fan grille. Add a foam windscreen; leave muted until the person opts in. |
-| 1 | VL53L1X time-of-flight breakout with 3.3 V I2C logic | Power and I2C pin levels vary by breakout; use only the selected board's documented input voltage and 3.3 V-compatible logic. Measures a person in its field of view around the 2 ft and 8 ft thresholds. This is a prototype input, not a safety interlock. |
-| 1 | 24 GHz mmWave presence module with documented UART/logic levels (for example, an HLK-LD2410C module) | Occupancy sensing when a person is relatively still. Confirm the exact board's supply voltage and UART logic levels from its datasheet before connecting. Verify room coverage, privacy behavior, false negatives, and motion through walls. |
-| 1 | Momentary low-voltage interaction button | Gives a local opt-in/stop control. Choose a switch and enclosure suitable for the controller's 3.3 V logic. |
-| 1 | Low-voltage status LED or small indicator module | Indicates microphone active and controller fault/status; use a current-limiting part/module rated for the chosen logic voltage. |
-| 1 | Optional Arduino Nano ESP32 | Not required if the Pi reads the low-voltage sensors directly. If used, power from its documented USB-C input (5 V); keep its GPIO at 3.3 V logic. It must not switch or connect to the fan's mains circuit. |
-| 1 each | Short HDMI cable; display's specified USB power cable; USB microphone cable; Pi USB-C power cable; documented sensor pigtails | Choose lengths to suit the panel and keep low-voltage cables clear of the fan and its suspension. Secure strain relief in the panel. |
-| 1, if needed | Powered USB hub with its own listed low-voltage adapter | Only if the selected screen/microphone exceed available Pi ports or power budget. Verify the manufacturer requirements; do not assume power can be daisy-chained. |
-| as needed | Low-voltage enclosure, cable glands/strain relief, standoffs, labels, and panel fasteners | Enclose and support display electronics. Choose panel attachment hardware for its independently approved support; do not hang it from the fan unless the manufacturer and installer approve the added load. |
-| 1 | Manufacturer-approved suspended mounting/cage kit for the selected fan | Exact model, orientation, structural support, and permitted loads must come from the fan maker and responsible installer. |
-| 1 | Rated pivot/swing actuator and motion controller | Separate engineered system sized and approved for the full guarded fan assembly, with travel limits and safe stop behavior. Do not choose an actuator based on blade count alone. |
-| 1 | Fan maker's documented controller/interface plus isolated Pi interface | Select only after the actual fan is chosen. Example interface families: isolated USB-to-RS-485 for documented Modbus RTU, or a properly isolated 0–10 V interface. Pi GPIO alone is neither. |
+| 1 | Raspberry Pi 5, 4 GB | Local web UI, sensor service, and application logic. |
+| 1 | Raspberry Pi 27 W USB-C power supply, correct regional plug | Dedicated power for the Pi. |
+| 1 | 64 GB high-endurance microSD card | Pi operating system and project software. |
+| 1 | Raspberry Pi case with cooling | Case and cooling compatible with Pi 5. |
+| 1 | Arduino Mega 2560 Rev3 or the Arduino board already selected | USB serial link to Pi and four simulated motor channels. Confirm the board's output/library compatibility before using it with any real driver. |
+| 1 | USB data cable for the selected Arduino | Must support data, not just charging; connector depends on the board. |
+| 1 | 24 GHz mmWave presence sensor module with documented UART or USB interface | For automatic room-presence detection, including still-person testing. Select a breakout with documented power and logic levels. |
+| 1 | VL53L1X time-of-flight breakout with documented 3.3 V-compatible I2C | For distance samples and approach estimation. Confirm the exact breakout board pinout and voltage. |
+| 1 | 5-inch HDMI touchscreen | Local UI display. |
+| 1 | Touchscreen's specified power supply/cable | Use the display maker's power requirements; do not assume the Pi can power it. |
+| 1 | USB microphone with physical mute switch | Optional breath/laughter interaction. |
+| 1 | Momentary interaction button | Local user interaction or opt-in input. |
+| 1 | Low-voltage status LED/module | Microphone-listening and application/fault indication. |
+| 1 set | Sensor jumper wires or manufacturer sensor cables | Match the sensor and Pi connectors/pinout; label both ends. |
+| 1 | Small low-voltage enclosure or electronics project case | Holds and protects the Pi, Arduino, and sensor connections during bench use. |
+| as needed | Short HDMI cable, USB cables, and cable labels | Match device ports and bench layout. |
 
-### Low-voltage wiring and color convention
+### Motor-control parts for a later phase
 
-Prefer USB for the display, microphone, and controller. For sensor pigtails,
-use the sensor manufacturer's cable and pinout. A project may choose **red for
-3.3 V**, **black for low-voltage ground**, **yellow for I2C SCL**, **blue for
-I2C SDA**, and **green/white for UART TX/RX**, but these colors are only a
-project labeling convention, not a universal electrical standard. Label both
-ends and verify every conductor against the exact board pinout before applying
-power. Raspberry Pi GPIO is 3.3 V logic and is not 5 V tolerant. Keep all
-prototype wiring low voltage and physically separate from the appliance's
-120 V wiring. Do not specify or repurpose mains conductor colors: an
-electrician must follow local code, the appliance instructions, and the
-approved controller documentation.
+| Qty | Part | Selection requirement |
+|---:|---|---|
+| 4 | Motors | One per cross arm; record exact model and manufacturer specifications before choosing drivers or power. |
+| 4 | Compatible motor drivers / ESCs | One per motor; must match motor type, voltage/current, and Arduino command interface. |
+| 1 | Motor power supply and distribution | Select only after the motor and driver models are known; do not use the Pi supply. |
+| 1 set | Motor-rated connectors, cables, and overcurrent protection | Match the selected motor, driver, and power-supply specifications. |
+| 1 | Physical motor-power disconnect / emergency stop | Select to suit the motor power system; independent of the Pi, browser, and Arduino software. |
 
-### Suspension and swinging materials
+Propellers, containment, cross-frame, suspension, display-panel mounting, and
+ceiling hardware belong to the separate mechanical design. Keep all propellers
+and motor power disconnected while building the sensor/software prototype.
+Do not order a particular driver or motor power supply until the exact motor
+models are known.
 
-The actual suspension/cage kit, load-rated bracket, structural attachment,
-restraints, and allowable travel must be specified for the chosen fan and
-building by the manufacturer and responsible installer. The decorative
-canopy in the concept is not a structural part. The display panel also needs
-its own approved support. The swing actuator must move the whole guarded
-assembly through controlled, limited travel; cable alone does not provide
-controlled swinging. These structural and motorized parts cannot be selected
-until a specific fan and mechanical design are approved.
+### Software components
 
-## Installation sequence
+| Component | Prototype implementation |
+|---|---|
+| Raspberry Pi OS | Local operating system; application works without cloud access. |
+| Web UI | Existing `index.html`, served locally; retain simulation mode for development. |
+| Pi application/API | Python 3 service (for example, FastAPI) reads sensors, tracks reading freshness/health, runs interaction state logic, and serves local status/control endpoints. |
+| Arduino firmware | Arduino IDE with C/C++. Reads validated serial commands, simulates four motor-channel states, and reports status/faults. Keep real ESC outputs disabled in this prototype. |
+| Pi-to-Arduino link | USB serial with a documented message format, such as newline-delimited JSON; reject malformed, stale, or unsupported commands. |
+| Presence-sensor reader | Python serial/USB reader using the selected mmWave module's documented protocol. |
+| Distance-sensor reader | Python I2C reader using the selected breakout manufacturer's library and pinout. |
+| Microphone input | Browser Web Audio API or a local Python audio library, enabled only after explicit user action; retain physical mute and a visible listening indicator. |
+| Tests and logs | Python unit tests for state transitions and sensor faults; timestamped local logs for sensor health, simulated commands, and Arduino responses. |
+| Dependencies | Python virtual environment with pinned packages; record Arduino library names and versions. Host required assets locally for offline operation. |
 
-### 1. Gather and verify the components
+### Detection and control architecture
 
-1. Select the forward-facing fan first. Record its exact model, nameplate,
-   manual, horizontal-axis mounting approval, guarded/suspended mounting kit,
-   airflow data, and documented speed-control interface.
-2. Make a parts checklist from the table. Confirm the screen's connector and
-   power needs, sensor breakout-board pinouts/logic levels, microphone USB
-   connection, and Pi supply before connecting anything.
-3. Have the responsible installer approve the suspension cage, structural
-   support, swing pivot/actuator, travel stops, assembly weight, and panel
-   support. Confirm the building structure, clearances, electrical supply,
-   and local requirements.
-4. Confirm the fan maker's controller protocol, required isolation, and
-   compatible Pi interface before ordering control electronics.
-5. Keep the fan disconnected during all student electronics assembly. Do not
-   open the fan or alter its motor, power cord, or wiring.
+Use mmWave for room presence and the range sensor for distance. The Pi service
+combines readings, tracks sensor health, and provides status to the UI. The
+browser communicates with the Pi service, never directly with Arduino pins or
+motor drivers. The Pi sends constrained commands to the Arduino over USB
+serial; the Arduino reports its state. Keep outputs disabled while testing
+this chain.
 
-### 2. Bench-build the low-voltage controller
+Treat missing, stale, or conflicting readings and loss of Pi-to-Arduino
+communication as unknown/fault states. Test them in software while motor
+outputs remain disabled. Presence and distance sensors support interaction;
+they are not safety devices.
 
-1. Use Raspberry Pi Imager on a computer to install Raspberry Pi OS on the
-   microSD card. Eject the card safely and insert it into the Pi.
-2. Place the Pi in its ventilated case and fit the case maker's cooling.
-   Keep the Pi and its power supply outside the fan enclosure and away from
-   hot or moving parts.
-3. With power disconnected, connect the touchscreen to HDMI and its
-   manufacturer-specified USB power input. Connect the microphone to USB but
-   leave its physical mute switch on.
-4. Connect the VL53L1X breakout to the Pi I2C bus using that exact board's
-   documentation: Pi 3.3 V, ground, SDA, and SCL. Standard Pi I2C1 physical
-   header pins are 1 (3V3), 6 (ground), 3 (GPIO2/SDA), and 5 (GPIO3/SCL).
-   Verify connector orientation and breakout input voltage first. Never put
-   5 V on a Pi GPIO pin.
-5. Connect an optional mmWave sensor only after verifying its supply and
-   UART logic levels. Use its documented pinout; do not assume modules with
-   the same sensor chip have identical interface voltages.
-6. Connect the low-voltage interaction button and status indicator according
-   to Raspberry Pi GPIO documentation. Label both ends of each sensor wire
-   with the project color convention above. Inspect for shorts, then power
-   the Pi using its specified USB-C supply.
+### Suspension and motion requirements
 
-### 3. Install and test software and sensors on the bench
+The sphere, internal cross, propeller containment, ceiling suspension,
+secondary retention, dynamic load rating, and display-panel support must be
+designed together and approved for the building. A hanging assembly can behave
+as a pendulum; changing propeller thrust can introduce unpredictable forces
+and oscillation. The proposed diagonal motor grouping does not by itself
+guarantee forward/back motion. No motorized overhead test or installation is
+appropriate until an engineer has analyzed the forces, failure modes, stops,
+clearances, and containment and approved a test plan.
 
-1. Boot the Pi and confirm the screen and local web page work. Host p5.js and
-   the poem data locally if the project must work offline.
-2. Enable I2C in Raspberry Pi OS and run a library/example for the selected
-   VL53L1X board. Check readings over the approach path, especially near
-   0.61 m (2 ft).
-3. If used, configure the mmWave module using its manufacturer documentation
-   and confirm room-presence events arrive on the documented interface.
-4. Test the interaction state machine with fan control physically absent:
-   empty room, unknown distance, sensor fault, or distance under 2 ft must
-   show off; 2–8 ft motion shows attentive; approach turns on airflow; over
-   8 ft waits for a blow; laughter shows staccato and
-   sustained laughter over 2 minutes requests swing; the simulated blow
-   control dissipates the poem and resumes airflow.
-5. Test occupancy with a person sitting still, leaving, and entering. Test
-   stale/disconnected sensors and reboot; uncertain inputs should display a
-   fault/off state, not start the fan.
-6. Test the microphone only by intentionally enabling it. Check physical
-   mute, listening indicator, opt-in permission, and manual stop. Loudness
-   detection is a rough blow cue and can mistake other sounds for breath.
+## Step-by-step electronics and software setup
 
-### 4. Assemble the display/control panel
+This sequence installs and tests the electronics/software prototype on a
+bench. The motor/ESC outputs remain disabled throughout.
 
-1. Lay out the touchscreen, microphone grille/windscreen, mute/interaction
-   button, status LED, and sensor apertures on a panel mock-up below the fan.
-2. Check that the panel does not block the fan intake/outlet, adjustment
-   access, or service access. Keep the microphone away from direct airflow to
-   reduce wind noise.
-3. Mount the components in a ventilated low-voltage enclosure with standoffs.
-   Add strain relief for HDMI, USB, power, and sensor cables; label them at
-   both ends.
-4. Confirm how the panel will be independently supported. Do not hang it
-   from the fan, fan grille, or decorative canopy unless its manufacturer
-   and the responsible installer approve that exact added load.
-5. Repeat the bench tests with the assembled panel before it goes near the
-   suspended fan.
+### 1. Prepare the Pi and display
 
-### 5. Have the overhead fan and final installation commissioned
+1. On a computer, use Raspberry Pi Imager to write Raspberry Pi OS to the
+   microSD card. Insert it into the Pi and complete first-boot setup.
+2. Connect the touchscreen to the Pi's HDMI output and power the display using
+   the display maker's specified cable/supply. Connect the Pi to its own
+   USB-C supply.
+3. Connect the Pi to the local network for setup and updates. The application
+   itself should run locally and not require cloud access.
+4. On the Pi, update Raspberry Pi OS and install Python 3, `python3-venv`,
+   `python3-pip`, and `git` using the OS package manager. Create a project
+   directory and Python virtual environment for the Aera service.
+5. The web page exists, but the Pi sensor/API service and Arduino firmware
+   still need to be created. Once present, install their pinned Python and
+   Arduino-library dependencies from the project's dependency files.
 
-1. Give the school's written approval, fan manual/nameplate, proposed
-   assembly weight, and mounting-kit documentation to the responsible
-   installer. Confirm approved orientation, support, clearances, and panel
-   attachment before overhead work.
-2. The responsible qualified installer performs overhead structural mounting
-   and any 120 V AC work using the approved fan kit, manufacturer instructions,
-   and local requirements. This guide intentionally does not give ceiling
-   fastening or mains conductor/wiring instructions.
-3. Have the installer verify the fan is secure, guarded, properly powered,
-   serviceable, and has an independent physical disconnect before anyone
-   operates it. Keep students clear during installation and commissioning.
-4. Place the display panel only on its approved independent support below the
-   fan. Route its low-voltage cables as approved, separated from mains parts,
-   moving parts, and hot surfaces.
-5. If the selected fan's manufacturer and installer approve a specific
-   listed electronic controller, the electrician installs it. Only then may
-   software interface with its documented isolated low-voltage input.
-   Without such a controller, operate the fan manually and use the Pi for
-   sensor/display/poetry only.
-6. Commission with the installer: verify manual stop/disconnect first, then
-   sensor fault/off behavior, under-2-ft off, occupancy states, and display
-   responses. Do not use prototype sensors as a blade-contact safety system.
+### 2. Install and test the people sensors
+
+1. Shut down and unplug the Pi before attaching sensor leads.
+2. Connect the mmWave module using that exact board's manufacturer pinout,
+   supply-voltage requirements, and documented UART/USB interface. Do not
+   infer pin voltage from the module name or sensor chip.
+3. Connect the time-of-flight breakout using its documentation. If using I2C,
+   enable I2C in Raspberry Pi OS and use only a breakout documented as
+   compatible with the Pi's 3.3 V logic. Never apply 5 V to a Pi GPIO pin.
+4. Secure the sensor boards on the bench so they cannot short against metal.
+   Reconnect Pi power and verify each sensor reader reports valid, timestamped
+   data before mounting sensors in a panel.
+5. Test presence by entering, leaving, and sitting still in the sensors'
+   fields of view. Test distance at several known positions. Record range,
+   coverage, missed detections, and false detections; these sensors are not
+   safety devices.
+6. Disconnect each sensor separately. The application should mark data as
+   unavailable/stale and display a fault rather than assuming a person is
+   absent or assigning a default distance.
+
+### 3. Set up the Pi application and web UI
+
+1. Serve the existing `index.html` from the Pi and confirm the page opens on
+   the touchscreen. Keep its sensor controls in simulation mode at first.
+2. Implement the Pi-side local API and sensor service. It should report
+   presence, distance, timestamp/freshness, sensor faults, microphone state,
+   Arduino connection, and requested (simulated) motor group.
+3. Add the state logic for present/absent, distance/approach, sensor fault,
+   explicit microphone consent, and simulated motor requests. No network
+   connection should be needed to request the off state.
+4. Add unit tests for normal readings and for absent, stale, conflicting, or
+   disconnected sensors before connecting real sensors to motor behavior.
+
+### 4. Set up the Arduino serial prototype
+
+1. Install Arduino IDE on a computer and select the exact Arduino board. Use
+   the USB data cable to connect it to the Pi.
+2. Create and upload firmware that starts in a disabled/simulation state,
+   reads a documented serial message format, rejects unknown commands, and
+   reports status/faults. Keep real ESC outputs disabled.
+3. Represent north, west, south, and east as four software channels. Add
+   north+west and south+east as named simulated groups; do not connect ESC
+   signal inputs or motor power for this test.
+4. Send test messages from the Pi and check that the Arduino reports the
+   expected simulated channels. Verify reset, malformed messages, and loss of
+   USB serial leave the simulated output off.
+
+### 5. Run the end-to-end software tests
+
+1. Start the Pi sensor service and web UI, connect the presence and distance
+   sensors, and confirm their values/status appear on the screen.
+2. Test entering, leaving, remaining still, approaching, and sensor
+   disconnection. Verify the UI updates and indicates any sensor fault.
+3. Connect the Arduino over USB and test simulated channel/group requests.
+   Unplug the USB cable and restart the Pi; the interface should report loss
+   of connection and request off.
+4. Test the microphone only after deliberate user consent. Verify the
+   physical mute and visible listening status.
+5. Keep propellers, powered ESCs, and motor supply disconnected during these
+   steps. The existing project does not yet include the Pi service or Arduino
+   firmware, so those software components must be implemented before this
+   procedure can be completed.
 
 ## Control software and fail-safe requirements
 
-Use the Raspberry Pi as the UI/application host. A separate Arduino is
-optional and is not a mains controller. Keep presence/distance logic local;
-do not depend on cloud access for any off request. Implement a state machine
-with safety precedence: absent, under 2 ft, unknown distance, sensor fault, or
-controller fault means fan and swing actuator off; at 2–8 ft, motion means
-attentive/stopped while approach enables airflow; beyond 8 ft, stop blades
-until a blow; a blow clears the poem and resumes airflow unless an off
-condition applies. Laughter gives staccato airflow in the permitted range;
-continuous laughter beyond 2 minutes requests the independently-rated swing
-mechanism, subject to all off conditions. Log sensor status, provide a
-physical stop, and require explicit microphone consent.
+Use the Raspberry Pi as the local UI and sensor-service host and the Arduino
+as the motor-command processor. Keep occupancy and distance logic local;
+cloud access must never be required to request an off state. Keep motor
+outputs simulated and disabled in this prototype.
+Sensor absence, unknown readings, stale data, disagreement, reboot,
+communication/controller fault, or emergency stop must disable motor
+commands. A separate physical motor-power disconnect remains independent of
+the application.
 
-The repository's `index.html` remains a browser-only prototype. It simulates
-sensor conditions with buttons; it has no Pi GPIO, Arduino firmware, sensor
-driver, authenticated hardware API, fan product selection, swing actuator, or
-appliance control. The real fan, guard, suspended mounting, actuator, and
-controller still need to be identified and approved for the full assembly and
-building before installation.
-The current page also loads p5.js and an embedded sketch from the internet; an
-offline installation would need a locally hosted sketch and library.
+The repository's `index.html` is still a browser-only prototype. It simulates
+sensor conditions with buttons and does not read actual people sensors, run
+Arduino firmware, or control motor drivers. Automatic detection requires a
+Pi sensor service and compatible, tested sensors. Real motor control requires
+the approved motor/driver system and independent safety hardware described
+above. The page also loads p5.js and an embedded sketch from the internet; an
+offline installation needs a locally hosted sketch and library.

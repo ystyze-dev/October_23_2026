@@ -80,28 +80,28 @@ before checkout.
 
 | Qty | Purchase this item | Why / notes |
 |---:|---|---|
-| 1 | Raspberry Pi 5, 4 GB | Local web UI and sensor application. |
-| 1 | Official Raspberry Pi 27 W USB-C Power Supply, regional plug version | Dedicated Pi supply; not for motors. |
-| 1 | Official Raspberry Pi Case for Raspberry Pi 5 | Includes active cooling. |
-| 1 | SanDisk High Endurance microSDXC, 64 GB | Pi OS and project storage. |
-| 1 | Arduino Mega 2560 Rev3 (official Arduino board) | USB-serial prototype controller; enough pins to model four motor channels. |
-| 1 | USB-A to USB-B data cable, 1 m | Connects the Mega's USB-B port to a Pi USB-A port. Make sure it is a data cable. |
-| 1 | Hi-Link HLK-LD2410C 24 GHz mmWave presence sensor module | Automatic room-presence sensing, including a stationary-person test. Buy the complete module/breakout, not the bare sensor IC. |
-| 1 | Adafruit CP2104 Friend USB-to-Serial Breakout, PID 3309 | Connects the LD2410C UART to Pi USB at 3.3 V logic. Use the sensor's documented power input and verify the particular module's UART levels before connecting. |
-| 1 | Regulated 5 V USB power adapter, 1 A or higher, plus the LD2410C power lead for the selected board | Dedicated sensor power if required by the board version. Confirm the exact module's supply and connector; do not power it from the CP2104's 3.3 V output. |
-| 1 | Adafruit VL53L1X Time of Flight Distance Sensor, PID 3967 | Pi-compatible I2C breakout for distance readings; includes level shifting and supports 3–5 V logic. |
-| 1 | STEMMA QT / Qwiic JST-SH 4-pin to four-wire female jumper pigtail | Connects the Adafruit distance breakout to the Pi GPIO I2C pins without soldering. Verify pin order before power. |
-| 1 | Waveshare 5-inch HDMI LCD (C), 800×480, capacitive-touch version | Display for the local web UI. Order the HDMI/touch version, not a DSI-only display. |
-| 1 | Waveshare-specified 5 V display power supply and USB touch cable | Powers the screen and carries touch input; do not assume the Pi can power it. Confirm the selected LCD revision's requirements. |
-| 1 | Logitech H390 USB headset | Optional microphone input with inline mic mute control. |
-| 1 | Solderless breadboard, 400-point | Bench prototyping for the button/status indicator only; keep motor power off. |
-| 1 | Momentary normally-open pushbutton, breadboard size | Local interaction/consent demo input. |
-| 1 | 5 mm LED, 1 | Simple status indicator for Arduino simulation. |
-| 1 | 330 Ω resistor, 1/4 W | Current limiting for the status LED when driven by a 5 V Arduino output. |
-| 1 set | Male-to-male and male-to-female jumper wires | For breadboard and sensor breakout connections; label both ends. |
-| 1 | Small plastic electronics project box | Bench enclosure for the Pi/Arduino/sensor setup; not an overhead mounting part. |
-| 1 | HDMI cable, 0.5–1 m | Connects the Pi to the Waveshare display. |
-| 1 | USB-A extension cable, 0.5–1 m (optional) | Useful for placing the mmWave module away from the Pi and other electronics. |
+| 1 | [Raspberry Pi 5, 4 GB — Amazon search](https://www.amazon.com/s?k=Raspberry+Pi+5+4GB) | Local web UI and sensor application. |
+| 1 | [Official Raspberry Pi 27 W USB-C Power Supply — Amazon search](https://www.amazon.com/s?k=official+Raspberry+Pi+27W+USB-C+power+supply+US) | Dedicated Pi supply; not for motors. |
+| 1 | [Official Raspberry Pi Case for Raspberry Pi 5 — Amazon search](https://www.amazon.com/s?k=official+Raspberry+Pi+5+case+active+cooling) | Includes active cooling. |
+| 1 | [SanDisk High Endurance microSDXC, 64 GB — Amazon search](https://www.amazon.com/s?k=SanDisk+High+Endurance+64GB+microSDXC) | Pi OS and project storage. |
+| 1 | [Arduino Mega 2560 Rev3 — Amazon search](https://www.amazon.com/s?k=Arduino+Mega+2560+Rev3+official) | USB-serial prototype controller; enough pins to model four motor channels. |
+| 1 | [USB-A to USB-B data cable, 1 m — Amazon search](https://www.amazon.com/s?k=USB+A+to+USB+B+data+cable+1m) | Connects the Mega's USB-B port to a Pi USB-A port. Make sure it is a data cable. |
+| 1 | [Hi-Link HLK-LD2410C 24 GHz mmWave presence sensor — Amazon search](https://www.amazon.com/s?k=Hi-Link+HLK-LD2410C+24GHz+presence+sensor+module) | Automatic room-presence sensing, including a stationary-person test. Buy the complete module/breakout, not the bare sensor IC. |
+| 1 | [Adafruit CP2104 Friend USB-to-Serial Breakout, PID 3309 — Amazon search](https://www.amazon.com/s?k=Adafruit+CP2104+Friend+USB+to+Serial+3309) | Connects the LD2410C UART to Pi USB at 3.3 V logic. Use the sensor's documented power input and verify the particular module's UART levels before connecting. |
+| 1 | [Regulated 5 V USB power adapter, 1 A or higher — Amazon search](https://www.amazon.com/s?k=5V+USB+power+adapter+1A+UL+listed) and [LD2410C power lead — Amazon search](https://www.amazon.com/s?k=HLK-LD2410C+power+cable) | Dedicated sensor power if required by the board version. Confirm the exact module's supply and connector; do not power it from the CP2104's 3.3 V output. |
+| 1 | [Adafruit VL53L1X Time of Flight Distance Sensor, PID 3967 — Amazon search](https://www.amazon.com/s?k=Adafruit+VL53L1X+3967+distance+sensor) | Pi-compatible I2C breakout for distance readings; includes level shifting and supports 3–5 V logic. |
+| 1 | [STEMMA QT / Qwiic JST-SH to four-wire jumper pigtail — Amazon search](https://www.amazon.com/s?k=STEMMA+QT+JST-SH+4+pin+female+jumper+cable) | Connects the Adafruit distance breakout to the Pi GPIO I2C pins without soldering. Verify pin order before power. |
+| 1 | [Waveshare 5-inch HDMI LCD (C), 800×480, capacitive touch — Amazon search](https://www.amazon.com/s?k=Waveshare+5+inch+HDMI+LCD+C+800x480+capacitive+touch) | Display for the local web UI. Order the HDMI/touch version, not a DSI-only display. |
+| 1 | [Waveshare-specified 5 V display supply and USB touch cable — Amazon search](https://www.amazon.com/s?k=Waveshare+5+inch+HDMI+LCD+5V+power+USB+touch+cable) | Powers the screen and carries touch input; do not assume the Pi can power it. Confirm the selected LCD revision's requirements. |
+| 1 | [Logitech H390 USB headset — Amazon search](https://www.amazon.com/s?k=Logitech+H390+USB+headset) | Optional microphone input with inline mic mute control. |
+| 1 | [400-point solderless breadboard — Amazon search](https://www.amazon.com/s?k=400+point+solderless+breadboard) | Bench prototyping for the button/status indicator only; keep motor power off. |
+| 1 | [Momentary normally-open breadboard pushbutton — Amazon search](https://www.amazon.com/s?k=momentary+normally+open+tactile+pushbutton+breadboard) | Local interaction/consent demo input. |
+| 1 | [5 mm LED — Amazon search](https://www.amazon.com/s?k=5mm+LED+assortment) | Simple status indicator for Arduino simulation. |
+| 1 | [330 Ω resistor, 1/4 W — Amazon search](https://www.amazon.com/s?k=330+ohm+1%2F4+W+resistor) | Current limiting for the status LED when driven by a 5 V Arduino output. |
+| 1 set | [Male-to-male and male-to-female jumper wire kit — Amazon search](https://www.amazon.com/s?k=male+to+male+male+to+female+jumper+wires+breadboard) | For breadboard and sensor breakout connections; label both ends. |
+| 1 | [Small plastic electronics project box — Amazon search](https://www.amazon.com/s?k=small+plastic+electronics+project+box) | Bench enclosure for the Pi/Arduino/sensor setup; not an overhead mounting part. |
+| 1 | [HDMI cable, 0.5–1 m — Amazon search](https://www.amazon.com/s?k=short+HDMI+cable+1+meter) | Connects the Pi to the Waveshare display. |
+| 1 | [USB-A extension cable, 0.5–1 m — Amazon search](https://www.amazon.com/s?k=USB+A+extension+cable+1+meter) | Optional; useful for placing the mmWave module away from the Pi and other electronics. |
 
 Buy the sensor/software list as the first order. It supports a real presence
 and distance readout, local display, and simulated Arduino channels. It does

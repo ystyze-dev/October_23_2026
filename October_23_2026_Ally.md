@@ -74,33 +74,53 @@ power and driver parts must match the exact motors and drivers you select.
 
 ### Buy for the sensor and software prototype
 
-| Qty | Part | Notes |
+These are specific example models so the prototype can be assembled without
+choosing a motor system. Check regional availability and connector revisions
+before checkout.
+
+| Qty | Purchase this item | Why / notes |
 |---:|---|---|
-| 1 | Raspberry Pi 5, 4 GB | Local web UI, sensor service, and application logic. |
-| 1 | Raspberry Pi 27 W USB-C power supply, correct regional plug | Dedicated power for the Pi. |
-| 1 | 64 GB high-endurance microSD card | Pi operating system and project software. |
-| 1 | Raspberry Pi case with cooling | Case and cooling compatible with Pi 5. |
-| 1 | Arduino Mega 2560 Rev3 or the Arduino board already selected | USB serial link to Pi and four simulated motor channels. Confirm the board's output/library compatibility before using it with any real driver. |
-| 1 | USB data cable for the selected Arduino | Must support data, not just charging; connector depends on the board. |
-| 1 | 24 GHz mmWave presence sensor module with documented UART or USB interface | For automatic room-presence detection, including still-person testing. Select a breakout with documented power and logic levels. |
-| 1 | VL53L1X time-of-flight breakout with documented 3.3 V-compatible I2C | For distance samples and approach estimation. Confirm the exact breakout board pinout and voltage. |
-| 1 | 5-inch HDMI touchscreen | Local UI display. |
-| 1 | Touchscreen's specified power supply/cable | Use the display maker's power requirements; do not assume the Pi can power it. |
-| 1 | USB microphone with physical mute switch | Optional breath/laughter interaction. |
-| 1 | Momentary interaction button | Local user interaction or opt-in input. |
-| 1 | Low-voltage status LED/module | Microphone-listening and application/fault indication. |
-| 1 set | Sensor jumper wires or manufacturer sensor cables | Match the sensor and Pi connectors/pinout; label both ends. |
-| 1 | Small low-voltage enclosure or electronics project case | Holds and protects the Pi, Arduino, and sensor connections during bench use. |
-| as needed | Short HDMI cable, USB cables, and cable labels | Match device ports and bench layout. |
+| 1 | Raspberry Pi 5, 4 GB | Local web UI and sensor application. |
+| 1 | Official Raspberry Pi 27 W USB-C Power Supply, regional plug version | Dedicated Pi supply; not for motors. |
+| 1 | Official Raspberry Pi Case for Raspberry Pi 5 | Includes active cooling. |
+| 1 | SanDisk High Endurance microSDXC, 64 GB | Pi OS and project storage. |
+| 1 | Arduino Mega 2560 Rev3 (official Arduino board) | USB-serial prototype controller; enough pins to model four motor channels. |
+| 1 | USB-A to USB-B data cable, 1 m | Connects the Mega's USB-B port to a Pi USB-A port. Make sure it is a data cable. |
+| 1 | Hi-Link HLK-LD2410C 24 GHz mmWave presence sensor module | Automatic room-presence sensing, including a stationary-person test. Buy the complete module/breakout, not the bare sensor IC. |
+| 1 | Adafruit CP2104 Friend USB-to-Serial Breakout, PID 3309 | Connects the LD2410C UART to Pi USB at 3.3 V logic. Use the sensor's documented power input and verify the particular module's UART levels before connecting. |
+| 1 | Regulated 5 V USB power adapter, 1 A or higher, plus the LD2410C power lead for the selected board | Dedicated sensor power if required by the board version. Confirm the exact module's supply and connector; do not power it from the CP2104's 3.3 V output. |
+| 1 | Adafruit VL53L1X Time of Flight Distance Sensor, PID 3967 | Pi-compatible I2C breakout for distance readings; includes level shifting and supports 3–5 V logic. |
+| 1 | STEMMA QT / Qwiic JST-SH 4-pin to four-wire female jumper pigtail | Connects the Adafruit distance breakout to the Pi GPIO I2C pins without soldering. Verify pin order before power. |
+| 1 | Waveshare 5-inch HDMI LCD (C), 800×480, capacitive-touch version | Display for the local web UI. Order the HDMI/touch version, not a DSI-only display. |
+| 1 | Waveshare-specified 5 V display power supply and USB touch cable | Powers the screen and carries touch input; do not assume the Pi can power it. Confirm the selected LCD revision's requirements. |
+| 1 | Logitech H390 USB headset | Optional microphone input with inline mic mute control. |
+| 1 | Solderless breadboard, 400-point | Bench prototyping for the button/status indicator only; keep motor power off. |
+| 1 | Momentary normally-open pushbutton, breadboard size | Local interaction/consent demo input. |
+| 1 | 5 mm LED, 1 | Simple status indicator for Arduino simulation. |
+| 1 | 330 Ω resistor, 1/4 W | Current limiting for the status LED when driven by a 5 V Arduino output. |
+| 1 set | Male-to-male and male-to-female jumper wires | For breadboard and sensor breakout connections; label both ends. |
+| 1 | Small plastic electronics project box | Bench enclosure for the Pi/Arduino/sensor setup; not an overhead mounting part. |
+| 1 | HDMI cable, 0.5–1 m | Connects the Pi to the Waveshare display. |
+| 1 | USB-A extension cable, 0.5–1 m (optional) | Useful for placing the mmWave module away from the Pi and other electronics. |
+
+Buy the sensor/software list as the first order. It supports a real presence
+and distance readout, local display, and simulated Arduino channels. It does
+not include a matched motor-and-ESC set or enable motor control.
+
+The mmWave module's UART signal is not a USB port: the CP2104 is the USB-UART
+adapter. Follow the exact LD2410C module documentation for its supply and
+UART pinout; never connect its power pin to a Pi GPIO signal pin. For the
+distance sensor, use the breakout's STEMMA QT connector and verify the cable
+pin order before connecting it to the Pi's 3.3 V I2C pins.
 
 ### Motor-control parts for a later phase
 
 | Qty | Part | Selection requirement |
 |---:|---|---|
-| 4 | Motors | One per cross arm; record exact model and manufacturer specifications before choosing drivers or power. |
-| 4 | Compatible motor drivers / ESCs | One per motor; must match motor type, voltage/current, and Arduino command interface. |
-| 1 | Motor power supply and distribution | Select only after the motor and driver models are known; do not use the Pi supply. |
-| 1 set | Motor-rated connectors, cables, and overcurrent protection | Match the selected motor, driver, and power-supply specifications. |
+| 4 | Motors and propellers | Must be selected as a compatible set for the intended application; no specific model can be matched without motor/thrust requirements. |
+| 4 | Manufacturer-compatible ESCs / motor drivers | Match the exact motor's voltage, current, and control interface; do not order until motor models are chosen. |
+| 1 | Motor power supply and distribution | Must match all four motors/drivers and their rated simultaneous load; do not use the Pi supply. |
+| 1 set | Motor-rated connectors, cables, and overcurrent protection | Match selected motor, driver, and supply specifications. |
 | 1 | Physical motor-power disconnect / emergency stop | Select to suit the motor power system; independent of the Pi, browser, and Arduino software. |
 
 Propellers, containment, cross-frame, suspension, display-panel mounting, and
